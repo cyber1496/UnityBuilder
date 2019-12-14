@@ -1,5 +1,6 @@
-﻿namespace UnityBuilder {
+﻿using UnityEditor.Build.Reporting;
+namespace UnityBuilder {
     public interface IProcessor {
-        void Process();
+        BuildResult Process(IBuildHelper helper);
     }
 }

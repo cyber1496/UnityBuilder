@@ -9,13 +9,13 @@ public class MyLogHandler : IBuildLogHandler {
     readonly ILogHandler defaultLogHandler = Debug.unityLogger.logHandler;
     private FileStream fileStream;
     private StreamWriter streamWriter;
-    public void PreProcess() {
-        string filePath = Application.dataPath.Replace("Assets", "Logs") + "/MyLogs.txt";
+    public void PreProcess(IBuildHelper helper) {
+        string filePath = Application.dataPath.Replace("Assets", "Logs/") + helper.OutputFile + ".log";
         fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
         streamWriter = new StreamWriter(fileStream);
         Debug.unityLogger.logHandler = this;
     }
-    public void PostProcess() {
+    public void PostProcess(IBuildHelper helper) {
         Debug.unityLogger.logHandler = defaultLogHandler;
         streamWriter.Flush();
         streamWriter.Dispose();
