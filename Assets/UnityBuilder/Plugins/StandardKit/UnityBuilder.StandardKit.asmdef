@@ -1,0 +1,17 @@
+{
+    "name": "UnityBuilder.StandardKit",
+    "references": [
+        "GUID:5e4452dbcd20043e9a7365d675fa7afe"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
