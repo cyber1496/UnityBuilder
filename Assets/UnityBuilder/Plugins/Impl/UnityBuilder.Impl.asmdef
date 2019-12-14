@@ -1,0 +1,18 @@
+{
+    "name": "UnityBuilder.Impl",
+    "references": [
+        "GUID:5e4452dbcd20043e9a7365d675fa7afe",
+        "GUID:4542d5245871c4b0780408868e51e205"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
