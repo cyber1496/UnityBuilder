@@ -3,5 +3,5 @@ using Debug = UnityEngine.Debug;
 
 public class MyPostProcessor : IPostProcessor {
     public int PostOrder => 0;
-    public void PostProcess() => Debug.Log("MyPostProcessor.PostProcess");
+    public void PostProcess(IBuildHelper helper) => Debug.Log("MyPostProcessor.PostProcess");
 }

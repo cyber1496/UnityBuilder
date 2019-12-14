@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
 
-namespace UnityBuilder {
-    public class StandardBuildLogHandler : IBuildLogHandler {
+namespace UnityBuilder.StandardKit {
+    public class BuildLogHandler : IBuildLogHandler {
         public string Tag => "[BUILD]";
         readonly ILogHandler defaultLogHandler = Debug.unityLogger.logHandler;
-        public void PreProcess() {
+        public void PreProcess(IBuildHelper helper) {
             Debug.unityLogger.logHandler = this;
         }
-        public void PostProcess() {
+        public void PostProcess(IBuildHelper helper) {
             Debug.unityLogger.logHandler = defaultLogHandler;
         }
         public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args) {
