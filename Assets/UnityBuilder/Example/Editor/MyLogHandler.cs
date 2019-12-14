@@ -7,10 +7,10 @@ using Debug = UnityEngine.Debug;
 public class MyLogHandler : IBuildLogHandler {
     public string Tag => "[MYBUILD]";
     readonly ILogHandler defaultLogHandler = Debug.unityLogger.logHandler;
-    private FileStream fileStream;
-    private StreamWriter streamWriter;
+    FileStream fileStream;
+    StreamWriter streamWriter;
     public void PreProcess(IBuildHelper helper) {
-        string filePath = Application.dataPath.Replace("Assets", "Logs/") + helper.OutputFile + ".log";
+        string filePath = Application.dataPath.Replace("Assets", "Logs/") + $"{helper.BuildTarget}_{helper.OutputFile}.log";
         fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
         streamWriter = new StreamWriter(fileStream);
         Debug.unityLogger.logHandler = this;

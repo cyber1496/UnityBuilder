@@ -12,8 +12,8 @@ namespace UnityBuilder {
         static IBuildHelper buildeHelper = new BuildHelper();
         static IBuildLogHandler buildLogHandler = new BuildLogHandler();
         static IProcessor processor = new Processor();
-        static readonly SortedDictionary<int, IPreProcessor> preProcessores = new SortedDictionary<int, IPreProcessor>();
-        static readonly SortedDictionary<int, IPostProcessor> postProcessores = new SortedDictionary<int, IPostProcessor>();
+        static readonly SortedDictionary<int, List<IPreProcessor>> preProcessores = new SortedDictionary<int, List<IPreProcessor>>();
+        static readonly SortedDictionary<int, List<IPostProcessor>> postProcessores = new SortedDictionary<int, List<IPostProcessor>>();
 
         public static RegisterState RegisterBuildHelper(IBuildHelper newBuildHelper) {
             var state = buildeHelper is BuildHelper || newBuildHelper is BuildHelper ? RegisterState.Success : RegisterState.Duplicated;
@@ -32,21 +32,26 @@ namespace UnityBuilder {
         }
         public static RegisterState RegisterPreProcessor(IPreProcessor preProcessor) {
             var state = preProcessores.ContainsKey(preProcessor.PreOrder) ? RegisterState.Duplicated : RegisterState.Success;
-            preProcessores.Add(preProcessor.PreOrder, preProcessor);
+            if (!preProcessores.ContainsKey(preProcessor.PreOrder)) {
+                preProcessores.Add(preProcessor.PreOrder, new List<IPreProcessor>());
+            }
+            preProcessores[preProcessor.PreOrder].Add(preProcessor);
             return state;
         }
         public static RegisterState RegisterPostProcessor(IPostProcessor postProcessor) {
             var state = postProcessores.ContainsKey(postProcessor.PostOrder) ? RegisterState.Duplicated : RegisterState.Success;
-            postProcessores.Add(postProcessor.PostOrder, postProcessor);
+            if (!postProcessores.ContainsKey(postProcessor.PostOrder)) {
+                postProcessores.Add(postProcessor.PostOrder, new List<IPostProcessor>());
+            }
+            postProcessores[postProcessor.PostOrder].Add(postProcessor);
             return state;
         }
         public static void Process() {
             buildLogHandler.PreProcess(buildeHelper);
-            Array.ForEach(preProcessores.Values.ToArray(), proc => proc?.PreProcess(buildeHelper));
+            Array.ForEach(preProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PreProcess(buildeHelper)));
             var result = processor.Process(buildeHelper);
-            Array.ForEach(postProcessores.Values.ToArray(), proc => proc?.PostProcess(buildeHelper));
+            Array.ForEach(postProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PostProcess(buildeHelper)));
             buildLogHandler.PostProcess(buildeHelper);
-
         }
     }
 }

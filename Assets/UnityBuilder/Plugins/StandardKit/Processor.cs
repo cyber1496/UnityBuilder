@@ -7,7 +7,7 @@ namespace UnityBuilder.StandardKit {
         public BuildResult Process(IBuildHelper helper) {
             var report = BuildPipeline.BuildPlayer(helper.TargetScenes, helper.OutputPath, helper.BuildTarget, helper.BuildOptions);
             var summary = report.summary;
-            Debug.Log($"result:{summary.result}, totalTime:{summary.totalTime}");
+            Debug.Log($"result:{summary.result}, outputPath:{summary.outputPath}, totalTime:{summary.totalTime}");
             return summary.result;
         }
     }
