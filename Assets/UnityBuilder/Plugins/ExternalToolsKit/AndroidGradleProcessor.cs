@@ -15,20 +15,23 @@ namespace UnityBuilder.ExternalToolKit {
                 return;
             }
             string scriptPath = Path.Combine(helper.RootPath, "Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/gradle-build.sh");
-            string result = CallScript(scriptPath, Path.GetFullPath(helper.OutputPath), "debug/launcher-debug.apk", helper.OutputExt);
-            Debug.Log(result);
+            int result = CallScript(scriptPath, out string message, Path.GetFullPath(helper.OutputPath), "debug/launcher-debug.apk", helper.OutputExt);
+            if (result != 0) {
+                throw new System.Exception(message);
+            }
         }
-        public string CallScript(string script, params string[] args) {
+        public int CallScript(string script, out string message, params string[] args) {
             var p = new Process();
             p.StartInfo.FileName = "/bin/bash";
             p.StartInfo.Arguments = $"-c \"sh \"{script}\" \"{string.Join("\" \"", args)}\"\"";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.Start();
-            var output = p.StandardOutput.ReadToEnd();
+            message = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
+            int exitcode = p.ExitCode;
             p.Close();
-            return output;
+            return exitcode;
         }
     }
 }
