@@ -11,10 +11,10 @@
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
-				<KeystoreName></KeystoreName>
-                <KeystorePass></KeystorePass>
-				<KeyaliasName></KeyaliasName>
-                <KeyaliasPass></KeyaliasPass>
+				<KeystoreName>Configuration/example.keystore</KeystoreName>
+                <KeystorePass>example</KeystorePass>
+				<KeyaliasName>example</KeyaliasName>
+                <KeyaliasPass>example</KeyaliasPass>
 			</Android>
 		</Scheme>
 		<Scheme Identifier="development">
@@ -27,10 +27,10 @@
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
-				<KeystoreName></KeystoreName>
-                <KeystorePass></KeystorePass>
-				<KeyaliasName></KeyaliasName>
-                <KeyaliasPass></KeyaliasPass>
+				<KeystoreName>Configuration/example.keystore</KeystoreName>
+                <KeystorePass>example</KeystorePass>
+				<KeyaliasName>example</KeyaliasName>
+                <KeyaliasPass>example</KeyaliasPass>
 			</Android>
 		</Scheme>
 	</Schemes>
