@@ -12,6 +12,8 @@
 			<Android>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
 				<KeystoreName>Configuration/example.keystore</KeystoreName>
+				<!-- <KeystoreName>${HOME}/example.keystore</KeystoreName> $ {HOME} can be specified. -->
+				<!-- <KeystoreName>../example.keystore</KeystoreName> You can specify a relative path. -->
                 <KeystorePass>example</KeystorePass>
 				<KeyaliasName>example</KeyaliasName>
                 <KeyaliasPass>example</KeyaliasPass>
