@@ -62,13 +62,19 @@ namespace UnityBuilder.StandardKit {
             public string KeystorePass;
             public string KeyaliasName;
             public string KeyaliasPass;
+            public bool UseCustomKeystore =>
+                !string.IsNullOrEmpty(KeystoreName) &&
+                !string.IsNullOrEmpty(KeystorePass) &&
+                !string.IsNullOrEmpty(KeyaliasName) &&
+                !string.IsNullOrEmpty(KeyaliasPass);
 
             public override string ToString() {
                 return $"ScriptingDefineSymbols:{ScriptingDefineSymbols}, " +
                        $"KeystoreName:{KeystoreName}, " +
                        $"KeystorePass:<private>, " +
                        $"KeyaliasName:{KeyaliasName}, " +
-                       $"KeyaliasPass:<private>";
+                       $"KeyaliasPass:<private>, " +
+                       $"UseCustomKeystore:{UseCustomKeystore}";
             }
         }
         bool Load(IBuildHelper helper, string configId, string schemeId, out Scheme scheme) {
