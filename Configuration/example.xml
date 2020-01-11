@@ -5,6 +5,7 @@
 			<ApplicationIdentifier>com.Cyber.UnityBuilder</ApplicationIdentifier>
 			<CompanyName>Cyber</CompanyName>
 			<ProductName>UnityBuilder</ProductName>
+			<Development>false</Development>
 			<IOS>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
 				<AppleDeveloperTeamID></AppleDeveloperTeamID>
@@ -23,6 +24,7 @@
 			<ApplicationIdentifier>com.Cyber.UnityBuilder.development</ApplicationIdentifier>
 			<CompanyName>Cyber</CompanyName>
 			<ProductName>[D]UnityBuilder</ProductName>
+			<Development>true</Development>
 			<IOS>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
 				<AppleDeveloperTeamID></AppleDeveloperTeamID>

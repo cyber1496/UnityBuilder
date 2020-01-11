@@ -15,7 +15,7 @@ namespace UnityBuilder.ExternalToolKit {
                 return;
             }
             string scriptPath = Path.Combine(helper.RootPath, "Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/gradle-build.sh");
-            int result = CallScript(scriptPath, out string message, Path.GetFullPath(helper.OutputPath), "debug/launcher-debug.apk", helper.OutputExt);
+            int result = CallScript(scriptPath, out string message, Path.GetFullPath(helper.OutputPath), EditorUserBuildSettings.development ? "debug/launcher-debug.apk" : "release/launcher-release.apk", helper.OutputExt);
             if (result != 0) {
                 throw new System.Exception(message);
             }
