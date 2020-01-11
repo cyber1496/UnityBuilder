@@ -37,6 +37,7 @@ namespace UnityBuilder.StandardKit {
             PlayerSettings.companyName = scheme.CompanyName;
             PlayerSettings.productName = scheme.ProductName;
             PlayerSettings.iOS.appleDeveloperTeamID = scheme.IOS.AppleDeveloperTeamID;
+            PlayerSettings.Android.useCustomKeystore = scheme.Android.UseCustomKeystore;
             PlayerSettings.Android.keystoreName = helper.GetReplacedPath(scheme.Android.KeystoreName);
             PlayerSettings.Android.keystorePass = scheme.Android.KeystorePass;
             PlayerSettings.Android.keyaliasName = scheme.Android.KeyaliasName;
