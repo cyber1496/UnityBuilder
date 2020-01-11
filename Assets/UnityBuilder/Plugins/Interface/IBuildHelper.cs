@@ -8,6 +8,8 @@ namespace UnityBuilder {
         string OutputFile { get; }
         string OutputExt { get; }
         BuildTarget BuildTarget { get; }
+        BuildTargetGroup BuildTargetGroup { get; }
         BuildOptions BuildOptions { get; }
+        IBuildArguments BuildArguments { get; }
     }
 }
