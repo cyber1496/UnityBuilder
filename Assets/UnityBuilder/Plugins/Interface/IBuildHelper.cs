@@ -11,5 +11,7 @@ namespace UnityBuilder {
         BuildTargetGroup BuildTargetGroup { get; }
         BuildOptions BuildOptions { get; }
         IBuildArguments BuildArguments { get; }
+
+        string GetReplacedPath(string path);
     }
 }
