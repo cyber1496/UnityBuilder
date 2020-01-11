@@ -28,6 +28,7 @@ namespace UnityBuilder.StandardKit {
             public string ApplicationIdentifier;
             public string CompanyName;
             public string ProductName;
+            public bool Development;
             public IOS IOS;
             public Android Android;
             public string GetScriptingDefineSymbols(BuildTargetGroup buildTargetGroup) {
@@ -43,6 +44,7 @@ namespace UnityBuilder.StandardKit {
                        $"ApplicationIdentifier:{ApplicationIdentifier}, " +
                        $"CompanyName:{CompanyName}, " +
                        $"ProductName:{ProductName}, " +
+                       $"Development:{Development}, " +
                        $"IOS:[{IOS.ToString()}], " +
                        $"Android:[{Android.ToString()}]";
             }

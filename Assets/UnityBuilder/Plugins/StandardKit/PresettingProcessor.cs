@@ -32,6 +32,8 @@ namespace UnityBuilder.StandardKit {
         }
         void ApplyScheme(IBuildHelper helper, Scheme scheme) {
             Debug.Log(scheme.ToString());
+            EditorUserBuildSettings.development = scheme.Development;
+            EditorUserBuildSettings.allowDebugging = scheme.Development;
             PlayerSettings.SetApplicationIdentifier(helper.BuildTargetGroup, scheme.ApplicationIdentifier);
             PlayerSettings.SetScriptingDefineSymbolsForGroup(helper.BuildTargetGroup, scheme.GetScriptingDefineSymbols(helper.BuildTargetGroup));
             PlayerSettings.companyName = scheme.CompanyName;
