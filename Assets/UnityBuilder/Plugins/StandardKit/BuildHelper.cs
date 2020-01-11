@@ -36,5 +36,6 @@ namespace UnityBuilder.StandardKit {
                 return opt;
             }
         }
+        public IBuildArguments BuildArguments { get; } = new BuildArguments();
     }
 }

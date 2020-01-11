@@ -14,8 +14,7 @@ public static class Example {
         BuildProvider.RegisterPostProcessor(new AndroidGradleProcessor());
         BuildProvider.RegisterPreProcessor(presettingProcessor);
     }
-    //TODO:CLIからの変更
-    static readonly PresettingProcessor presettingProcessor = new PresettingProcessor("example", "development");
+    static readonly PresettingProcessor presettingProcessor = new PresettingProcessor();
 
 #pragma warning disable IDE0051 // MenuItemはどこからも参照されない
     [MenuItem("Tools/Build/DoIt")] static void DoIt() => BuildProvider.Process();

@@ -5,7 +5,7 @@ namespace UnityBuilder.StandardKit {
     public partial class PresettingProcessor : IPreProcessor {
         public int PreOrder => 0;
 
-        public PresettingProcessor(string newConfigName, string newSchemeName) {
+        public PresettingProcessor(string newConfigName = "", string newSchemeName = "") {
             Change(newConfigName, newSchemeName);
         }
         public void Change(string newConfigName, string newSchemeName) {
@@ -16,9 +16,18 @@ namespace UnityBuilder.StandardKit {
         string schemeName;
 
         public void PreProcess(IBuildHelper helper) {
+            ReadArguments(helper);
             Debug.Log($"PresettingProcessor.PreProcess:[{configName},{schemeName}]");
             if (Load(helper, configName, schemeName, out Scheme scheme)) {
                 ApplyScheme(helper, scheme);
+            }
+        }
+        void ReadArguments(IBuildHelper helper) {
+            if (helper.BuildArguments.ContainsKey("-batchmode")) {
+                if (helper.BuildArguments.ContainsKey("-config") && helper.BuildArguments.ContainsKey("-scheme")) {
+                    configName = helper.BuildArguments["-config"];
+                    schemeName = helper.BuildArguments["-scheme"];
+                }
             }
         }
         void ApplyScheme(IBuildHelper helper, Scheme scheme) {

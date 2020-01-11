@@ -10,6 +10,8 @@ $UNITY \
 	-projectPath $PWD \
 	-buildTarget `echo $PLATFORM | tr '[A-Z]' '[a-z]'` \
 	-executeMethod Example.DoIt \
+	-config example \
+	-scheme development \
 	-logFile "Logs/$PLATFORM/logFile.log"
 echo "exitcode:"$?
 
@@ -20,5 +22,7 @@ $UNITY \
 	-projectPath $PWD \
 	-buildTarget `echo $PLATFORM | tr '[A-Z]' '[a-z]'` \
 	-executeMethod Example.DoIt \
+	-config example \
+	-scheme product \
 	-logFile "Logs/$PLATFORM/logFile.log"
 echo "exitcode:"$?

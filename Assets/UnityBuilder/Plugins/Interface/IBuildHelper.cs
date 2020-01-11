@@ -10,5 +10,6 @@ namespace UnityBuilder {
         BuildTarget BuildTarget { get; }
         BuildTargetGroup BuildTargetGroup { get; }
         BuildOptions BuildOptions { get; }
+        IBuildArguments BuildArguments { get; }
     }
 }
