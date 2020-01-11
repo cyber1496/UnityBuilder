@@ -25,6 +25,7 @@ namespace UnityBuilder.StandardKit {
             }
         }
         public BuildTarget BuildTarget => EditorUserBuildSettings.activeBuildTarget;
+        public BuildTargetGroup BuildTargetGroup => EditorUserBuildSettings.selectedBuildTargetGroup;
         public BuildOptions BuildOptions {
             get {
                 var opt = BuildOptions.None;

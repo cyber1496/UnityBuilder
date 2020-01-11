@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration Identifier="example">
+	<Schemes>
+		<Scheme Identifier="product">
+			<ApplicationIdentifier>com.Cyber.UnityBuilder</ApplicationIdentifier>
+			<CompanyName>Cyber</CompanyName>
+			<ProductName>UnityBuilder</ProductName>
+			<IOS>
+    			<ScriptingDefineSymbols></ScriptingDefineSymbols>
+				<AppleDeveloperTeamID></AppleDeveloperTeamID>
+			</IOS>
+			<Android>
+    			<ScriptingDefineSymbols></ScriptingDefineSymbols>
+				<KeystoreName></KeystoreName>
+                <KeystorePass></KeystorePass>
+				<KeyaliasName></KeyaliasName>
+                <KeyaliasPass></KeyaliasPass>
+			</Android>
+		</Scheme>
+		<Scheme Identifier="development">
+			<ApplicationIdentifier>com.Cyber.UnityBuilder.development</ApplicationIdentifier>
+			<CompanyName>Cyber</CompanyName>
+			<ProductName>[D]UnityBuilder</ProductName>
+			<IOS>
+    			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
+				<AppleDeveloperTeamID></AppleDeveloperTeamID>
+			</IOS>
+			<Android>
+    			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
+				<KeystoreName></KeystoreName>
+                <KeystorePass></KeystorePass>
+				<KeyaliasName></KeyaliasName>
+                <KeyaliasPass></KeyaliasPass>
+			</Android>
+		</Scheme>
+	</Schemes>
+</Configuration>
