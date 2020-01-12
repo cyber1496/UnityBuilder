@@ -56,7 +56,9 @@ namespace UnityBuilder {
             buildLogHandler.PreProcess(buildeHelper);
             PreProcess();
             var result = processor.Process(buildeHelper);
-            PostProcess();
+            if (result == BuildResult.Succeeded) {
+                PostProcess();
+            }
             buildLogHandler.PostProcess(buildeHelper);
         }
     }
