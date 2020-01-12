@@ -7,6 +7,7 @@ public static class Example {
     static Example() {
         BuildProvider.RegisterBuildLogHandler(new MyLogHandler());
 
+        BuildProvider.RegisterProcessor(new MyProcessor());
         BuildProvider.RegisterPreProcessor(new MyPreProcessor());
         BuildProvider.RegisterPostProcessor(new MyPostProcessor());
 

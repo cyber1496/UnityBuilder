@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 
 namespace UnityBuilder.ExternalToolKit {
     public sealed class AndroidGradleProcessor : IPostProcessor {
-        public int PostOrder => 0;
+        public int PostOrder => 10;
         public void PostProcess(IBuildHelper helper) {
             Debug.Log("AndroidGradleProcessor.PostProcess");
             if (helper.BuildTarget != BuildTarget.Android) {
@@ -28,7 +28,7 @@ namespace UnityBuilder.ExternalToolKit {
         }
         string ConverPath(string path) {
 #if UNITY_EDITOR_WIN
-            path = path.Replace("/","\\");
+            path = path.Replace("/", "\\");
 #endif
             return path;
         }
