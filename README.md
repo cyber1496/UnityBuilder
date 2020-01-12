@@ -62,8 +62,8 @@ Options:
     --help      -h  print this
     --platform  -p  Platform [Android | iOS]
     --config    -c  Configuration Identifier in Configuration
-    --entry     -e  Entry Method Name
     --scheme    -s  Scheme Identifier in Configuration
+    --entry     -e  Entry Method Name
 ```
 
 ### ■ Batch/AppBuild.sh Example
