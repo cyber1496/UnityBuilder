@@ -46,11 +46,19 @@ namespace UnityBuilder {
             postProcessores[postProcessor.PostOrder].Add(postProcessor);
             return state;
         }
+        public static void PreProcess() {
+            Array.ForEach(preProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PreProcess(buildeHelper)));
+        }
+        public static void PostProcess() {
+            Array.ForEach(postProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PostProcess(buildeHelper)));
+        }
         public static void Process() {
             buildLogHandler.PreProcess(buildeHelper);
-            Array.ForEach(preProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PreProcess(buildeHelper)));
+            PreProcess();
             var result = processor.Process(buildeHelper);
-            Array.ForEach(postProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PostProcess(buildeHelper)));
+            if (result == BuildResult.Succeeded) {
+                PostProcess();
+            }
             buildLogHandler.PostProcess(buildeHelper);
         }
     }

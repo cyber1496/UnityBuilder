@@ -10,7 +10,7 @@ public class MyLogHandler : IBuildLogHandler {
     FileStream fileStream;
     StreamWriter streamWriter;
     public void PreProcess(IBuildHelper helper) {
-        string filePath = Application.dataPath.Replace("Assets", "Logs/") + $"{helper.BuildTarget}_{helper.OutputFile}.log";
+        string filePath = Application.dataPath.Replace("Assets", "Logs/") + $"{helper.BuildTarget}/{helper.OutputFile}.log";
         fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
         streamWriter = new StreamWriter(fileStream);
         Debug.unityLogger.logHandler = this;

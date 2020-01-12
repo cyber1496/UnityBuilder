@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.IO;
+using UnityEngine;
 using UnityEditor;
 
 namespace UnityBuilder.StandardKit {
@@ -25,6 +27,7 @@ namespace UnityBuilder.StandardKit {
             }
         }
         public BuildTarget BuildTarget => EditorUserBuildSettings.activeBuildTarget;
+        public BuildTargetGroup BuildTargetGroup => EditorUserBuildSettings.selectedBuildTargetGroup;
         public BuildOptions BuildOptions {
             get {
                 var opt = BuildOptions.None;
@@ -34,6 +37,14 @@ namespace UnityBuilder.StandardKit {
                 }
                 return opt;
             }
+        }
+        public IBuildArguments BuildArguments { get; } = new BuildArguments();
+
+        public string GetReplacedPath(string path) {
+            path = path.Replace("${PROJECT_ROOT}/", RootPath);
+            path = path.Replace("${HOME}", Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+            path = Path.GetFullPath(path);
+            return path;
         }
     }
 }
