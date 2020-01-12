@@ -2,7 +2,7 @@ chcp 65001
 @echo off
 set SCRIPT_DIR=%~dp0
 cd %~1
-xcopy /Q /Y /I %SCRIPT_DIR%\gradle %~1\gradle > nul
+xcopy /Q /Y /I /E %SCRIPT_DIR%\gradle %~1\gradle > nul
 copy /Y %SCRIPT_DIR%\gradle.properties %~1\gradle.properties > nul
 copy /Y %SCRIPT_DIR%\gradlew %~1\gradlew > nul
 copy /Y %SCRIPT_DIR%\gradlew.bat %~1\gradlew.bat > nul
