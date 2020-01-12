@@ -3,7 +3,7 @@ using Debug = UnityEngine.Debug;
 
 namespace UnityBuilder.StandardKit {
     public partial class PresettingProcessor : IPreProcessor {
-        public int PreOrder => 0;
+        public int PreOrder => 10;
 
         public PresettingProcessor(string newConfigName = "", string newSchemeName = "") {
             Change(newConfigName, newSchemeName);
