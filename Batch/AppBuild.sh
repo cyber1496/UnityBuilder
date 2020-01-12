@@ -18,7 +18,6 @@ else
 	echo "Not supported OS."
 	exit 1
 fi
-echo $UNITY_PATH
 
 PLATFORM=Android
 "${UNITY_PATH}" \
