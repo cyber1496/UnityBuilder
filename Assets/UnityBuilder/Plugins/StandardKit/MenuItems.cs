@@ -20,6 +20,10 @@ namespace UnityBuilder.StandardKit {
                 AssetDatabase.ImportPackage(PackageFile, true);
             }
         }
+        [MenuItem("Tools/UnityBuilder/ForceReserializeAssets")]
+        static void ForceReserializeAssets() {
+            AssetDatabase.ForceReserializeAssets();
+        }
 #pragma warning restore IDE0051
     }
 }
