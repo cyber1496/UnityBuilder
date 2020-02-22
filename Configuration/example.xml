@@ -2,8 +2,8 @@
 <Configuration Identifier="example">
 	<Schemes>
 		<Scheme Identifier="product">
-			<ApplicationIdentifier>com.Cyber.UnityBuilder</ApplicationIdentifier>
-			<CompanyName>Cyber</CompanyName>
+			<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
+			<CompanyName>cyber1496</CompanyName>
 			<ProductName>UnityBuilder</ProductName>
 			<Development>false</Development>
 			<IOS>
@@ -21,8 +21,8 @@
 			</Android>
 		</Scheme>
 		<Scheme Identifier="development">
-			<ApplicationIdentifier>com.Cyber.UnityBuilder.development</ApplicationIdentifier>
-			<CompanyName>Cyber</CompanyName>
+			<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
+			<CompanyName>cyber1496</CompanyName>
 			<ProductName>[D]UnityBuilder</ProductName>
 			<Development>true</Development>
 			<IOS>
