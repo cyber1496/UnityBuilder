@@ -36,6 +36,7 @@ namespace UnityBuilder.ExternalToolKit {
             if (EditorUserBuildSettings.buildAppBundle) {
                 string scriptPath = ConverPath(Path.Combine(helper.RootPath, GradleEnvironment.BuildToolScriptFilePath));
                 int result = CallScript(scriptPath, out string message,
+                    ConverPath(GradleEnvironment.BuildToolJarPath),
                     helper.OutputPath + helper.OutputExt,
                     helper.OutputPath + ".apks",
                     PlayerSettings.Android.keystoreName,
@@ -87,6 +88,14 @@ namespace UnityBuilder.ExternalToolKit {
 #else
                     "buildtool-build-apks.sh";
 #endif
+            public static string BuildToolJarFileName => "bundletool-all-0.10.3.jar";
+            public static string BuildToolJarPath =>
+#if UNITY_EDITOR_WIN
+                Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), $"Data/PlaybackEngines/AndroidPlayer/Tools/{BuildToolJarFileName}");
+#else
+                Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), $"PlaybackEngines/AndroidPlayer/Tools/{BuildToolJarFileName}");
+#endif
+
             public static string BuildToolScriptFilePath =>
                 $"Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/{BuildToolScriptFileName}";
             public static string ProcessorFileName =>

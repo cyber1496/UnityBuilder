@@ -1,13 +1,14 @@
 #!/bin/zsh
 
-BUNDLE=$1
-APKS=$2
-KS=$3
-KS_PASS=$4
-KS_KEY_ALIAS=$5
-KEY_PASS=$6
+TOOL="$1"
+BUNDLE=$2
+APKS=$3
+KS=$4
+KS_PASS=$5
+KS_KEY_ALIAS=$6
+KEY_PASS=$7
 
-java -jar -Dfile.encoding=EUC-JP Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/bundletool-all-0.13.0.jar \
+java -jar -Dfile.encoding=EUC-JP $TOOL \
 build-apks \
 --overwrite \
 --bundle=$BUNDLE \

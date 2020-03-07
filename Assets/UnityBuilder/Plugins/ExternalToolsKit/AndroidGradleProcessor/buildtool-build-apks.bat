@@ -1,14 +1,15 @@
 chcp 65001
 @echo off
 
-set BUNDLE=%~1
-set APKS=%~2
-set KS=%~3
-set KS_PASS=%~4
-set KS_KEY_ALIAS=%~5
-set KEY_PASS=%~6
+set TOOL="%~1"
+set BUNDLE=%~2
+set APKS=%~3
+set KS=%~4
+set KS_PASS=%~5
+set KS_KEY_ALIAS=%~6
+set KEY_PASS=%~7
 
-java -jar -Dfile.encoding=EUC-JP Assets\UnityBuilder\Plugins\ExternalToolsKit\AndroidGradleProcessor\bundletool-all-0.13.0.jar ^
+java -jar -Dfile.encoding=EUC-JP %TOOL% ^
 build-apks ^
 --overwrite ^
 --bundle=%BUNDLE% ^
