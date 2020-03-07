@@ -8,7 +8,7 @@
 			<Development>false</Development>
 			<IOS>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
-				<AppleDeveloperTeamID></AppleDeveloperTeamID>
+				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
@@ -28,7 +28,7 @@
 			<Development>true</Development>
 			<IOS>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
-				<AppleDeveloperTeamID></AppleDeveloperTeamID>
+				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
