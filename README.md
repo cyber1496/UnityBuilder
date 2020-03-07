@@ -26,6 +26,7 @@
             </IOS>
             <Android>
                 <ScriptingDefineSymbols>[Scripting Define Symbols]</ScriptingDefineSymbols>
+                <UseBuildAppBundle>[Use App Bundle]</UseBuildAppBundle>
                 <KeystoreName>[Keystore File Path]</KeystoreName>
                 <KeystorePass>[Keystore Password]</KeystorePass>
                 <KeyaliasName>[Keyalias Name]</KeyaliasName>
