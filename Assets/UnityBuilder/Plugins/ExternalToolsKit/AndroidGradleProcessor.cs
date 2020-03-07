@@ -16,14 +16,39 @@ namespace UnityBuilder.ExternalToolKit {
             if (!helper.BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer)) {
                 return;
             }
-            string scriptPath = ConverPath(Path.Combine(helper.RootPath, GradleEnvironment.ScriptFilePath));
-            string outputPath = ConverPath(Path.GetFullPath(helper.OutputPath));
-            int result = CallScript(scriptPath, out string message, outputPath, GradleEnvironment.GetDefaultAPKFileName(EditorUserBuildSettings.development), helper.OutputExt);
-            if (result != 0) {
-                throw new System.Exception(message);
+            {
+                string variant = GradleEnvironment.GetBuildVariant(EditorUserBuildSettings.development);
+                string scriptPath = ConverPath(Path.Combine(helper.RootPath, GradleEnvironment.GradleScriptFilePath));
+                int result = CallScript(scriptPath, out string message,
+                    ConverPath(Path.GetFullPath(helper.OutputPath)),
+                    ConverPath(GradleEnvironment.GetOutputFilePath(variant)),
+                    helper.OutputExt,
+                    variant,
+                    EditorUserBuildSettings.buildAppBundle.ToString()
+                );
+                if (result != 0) {
+                    throw new System.Exception(message);
+                }
+                else {
+                    Debug.Log(message);
+                }
             }
-            else {
-                Debug.Log(message);
+            if (EditorUserBuildSettings.buildAppBundle) {
+                string scriptPath = ConverPath(Path.Combine(helper.RootPath, GradleEnvironment.BuildToolScriptFilePath));
+                int result = CallScript(scriptPath, out string message,
+                    helper.OutputPath + helper.OutputExt,
+                    helper.OutputPath + ".apks",
+                    PlayerSettings.Android.keystoreName,
+                    PlayerSettings.Android.keystorePass,
+                    PlayerSettings.Android.keyaliasName,
+                    PlayerSettings.Android.keyaliasPass
+                );
+                if (result != 0) {
+                    throw new System.Exception(message);
+                }
+                else {
+                    Debug.Log(message);
+                }
             }
         }
         string ConverPath(string path) {
@@ -48,29 +73,28 @@ namespace UnityBuilder.ExternalToolKit {
             return exitcode;
         }
         static class GradleEnvironment {
-            static string ScriptFileName {
-                get {
+            static string GradleScriptFileName =>
 #if UNITY_EDITOR_WIN
-                    return "gradle-build.bat";
+                "gradle-build.bat";
 #else
-                    return "gradle-build.sh";
+                "gradle-build.sh";
 #endif
-                }
-            }
-            public static string ScriptFilePath {
-                get {
-                    return $"Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/{ScriptFileName}";
-                }
-            }
-            public static string ProcessorFileName {
-                get {
+            public static string GradleScriptFilePath =>
+                $"Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/{GradleScriptFileName}";
+            static string BuildToolScriptFileName =>
 #if UNITY_EDITOR_WIN
-                    return Environment.GetEnvironmentVariable("ComSpec");
+                    "buildtool-build-apks.bat";
 #else
-                    return "/bin/bash";
+                    "buildtool-build-apks.sh";
 #endif
-                }
-            }
+            public static string BuildToolScriptFilePath =>
+                $"Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/{BuildToolScriptFileName}";
+            public static string ProcessorFileName =>
+#if UNITY_EDITOR_WIN
+                Environment.GetEnvironmentVariable("ComSpec");
+#else
+                "/bin/bash";
+#endif
             public static string GetArgumentsForProcessor(string script, string[] args) {
                 string argstr = $"\"{script}\" \"{string.Join("\" \"", args)}\"";
 #if UNITY_EDITOR_WIN
@@ -79,9 +103,12 @@ namespace UnityBuilder.ExternalToolKit {
                 return $"-c \"sh {argstr}\"";
 #endif
             }
-            public static string GetDefaultAPKFileName(bool isDevelopment) {
-                return isDevelopment ? "debug/launcher-debug.apk" : "release/launcher-release.apk";
-            }
+            public static string GetBuildVariant(bool isDevelopment) =>
+                isDevelopment ? "debug" : "release";
+            public static string GetOutputFilePath(string variant) =>
+                EditorUserBuildSettings.buildAppBundle ?
+                    $"launcher/build/outputs/bundle/{variant}/launcher" :
+                    $"launcher/build/outputs/apk/{variant}/launcher-{variant}";
         }
     }
 }

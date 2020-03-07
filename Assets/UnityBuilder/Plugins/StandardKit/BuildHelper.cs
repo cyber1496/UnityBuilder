@@ -10,14 +10,16 @@ namespace UnityBuilder.StandardKit {
         public string OutputPath {
             get {
                 bool exportExternalProject = BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer);
-                return $"build/{BuildTarget.ToString()}/{OutputFile}" + (exportExternalProject ? "" : $"{OutputExt}");
+                return $"build/{BuildTarget}/{OutputFile}" + (exportExternalProject ? "" : $"{OutputExt}");
             }
         }
         public string OutputFile => PlayerSettings.productName;
         public string OutputExt {
             get {
                 switch (BuildTarget) {
-                    case BuildTarget.Android: return ".apk";
+                    case BuildTarget.Android: {
+                            return EditorUserBuildSettings.buildAppBundle ? ".aab" : ".apk";
+                        }
                     case BuildTarget.iOS: return ".ipa";
                     case BuildTarget.StandaloneWindows:
                     case BuildTarget.StandaloneWindows64: return ".exe";

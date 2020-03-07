@@ -12,6 +12,7 @@
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
+				<UseBuildAppBundle>true</UseBuildAppBundle>
 				<KeystoreName>Configuration/example.keystore</KeystoreName>
 				<!-- <KeystoreName>${HOME}/example.keystore</KeystoreName> $ {HOME} can be specified. -->
 				<!-- <KeystoreName>../example.keystore</KeystoreName> You can specify a relative path. -->
@@ -31,6 +32,7 @@
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
+				<UseBuildAppBundle>false</UseBuildAppBundle>
 				<KeystoreName>Configuration/example.keystore</KeystoreName>
                 <KeystorePass>example</KeystorePass>
 				<KeyaliasName>example</KeyaliasName>
