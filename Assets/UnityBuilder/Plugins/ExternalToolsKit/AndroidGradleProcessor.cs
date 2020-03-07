@@ -1,7 +1,10 @@
+#if !UNITY_2019 && UNITY_2018_4_OR_NEWER
+#define COMPATIBILITY_UNITY_2018_4
+#endif
 using System;
-using System.Text;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
 
@@ -19,8 +22,10 @@ namespace UnityBuilder.ExternalToolKit {
             {
                 string variant = GradleEnvironment.GetBuildVariant(EditorUserBuildSettings.development);
                 string scriptPath = ConverPath(Path.Combine(helper.RootPath, GradleEnvironment.GradleScriptFilePath));
+                string outputPath = ConverPath(Path.GetFullPath(helper.OutputPath));
+                SetUpForUnity2018_4(Path.GetDirectoryName(scriptPath), outputPath);
                 int result = CallScript(scriptPath, out string message,
-                    ConverPath(Path.GetFullPath(helper.OutputPath)),
+                    outputPath,
                     ConverPath(GradleEnvironment.GetOutputFilePath(variant)),
                     helper.OutputExt,
                     variant,
@@ -52,13 +57,40 @@ namespace UnityBuilder.ExternalToolKit {
                 }
             }
         }
+        [Conditional("COMPATIBILITY_UNITY_2018_4")]
+        void SetUpForUnity2018_4(string scriptPath, string outputPath) {
+            Debug.Log($"COMPATIBILITY_UNITY_2018_4 enable.");
+            string srcRootPath = Path.Combine(scriptPath, "compatibility-for-2018");
+            Replace(srcRootPath, outputPath, "build.gradle.src", (src) =>
+                src.Replace("[PRODUCT_NAME]", PlayerSettings.productName)
+            );
+            Replace(srcRootPath, outputPath, "settings.gradle.src", (src) =>
+                src.Replace("[PRODUCT_NAME]", PlayerSettings.productName)
+            );
+            Replace(srcRootPath, outputPath, "local.properties.src", (src) =>
+                src.Replace("[ANDROID_SDK]", EditorPrefs.GetString("AndroidSdkRoot").Replace(":", "\\:"))
+                   .Replace("[ANDROID_NDK]", EditorPrefs.GetString("AndroidNdkRootR16b").Replace(":", "\\:"))
+            );
+            string gradlePath = $"{outputPath}/{PlayerSettings.productName}/build.gradle";
+            File.WriteAllText(gradlePath,
+                File.ReadAllText(gradlePath).Replace(
+                    "apply plugin: 'com.android.library'",
+                    "apply plugin: 'com.android.application'"
+                ));
+        }
+        [Conditional("COMPATIBILITY_UNITY_2018_4")]
+        void Replace(string root, string output, string srcFileName, Func<string, string> process) {
+            string srcPath = Path.Combine(root, srcFileName);
+            string dstPath = srcPath.Replace(root, output).Replace(".src", "");
+            File.WriteAllText(dstPath, process(File.ReadAllText(srcPath)));
+        }
         string ConverPath(string path) {
 #if UNITY_EDITOR_WIN
             path = path.Replace("/", "\\");
 #endif
             return path;
         }
-        public int CallScript(string script, out string message, params string[] args) {
+        int CallScript(string script, out string message, params string[] args) {
             var p = new Process();
             p.StartInfo.FileName = GradleEnvironment.ProcessorFileName;
             p.StartInfo.Arguments = GradleEnvironment.GetArgumentsForProcessor(script, args);
@@ -88,7 +120,12 @@ namespace UnityBuilder.ExternalToolKit {
 #else
                     "buildtool-build-apks.sh";
 #endif
-            public static string BuildToolJarFileName => "bundletool-all-0.10.3.jar";
+            public static string BuildToolJarFileName =>
+#if COMPATIBILITY_UNITY_2018_4
+                "bundletool-all-0.6.0.jar";
+#else
+                "bundletool-all-0.10.3.jar";
+#endif
             public static string BuildToolJarPath =>
 #if UNITY_EDITOR_WIN
                 Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), $"Data/PlaybackEngines/AndroidPlayer/Tools/{BuildToolJarFileName}");
@@ -116,8 +153,13 @@ namespace UnityBuilder.ExternalToolKit {
                 isDevelopment ? "debug" : "release";
             public static string GetOutputFilePath(string variant) =>
                 EditorUserBuildSettings.buildAppBundle ?
+#if COMPATIBILITY_UNITY_2018_4
+                    $"{PlayerSettings.productName}/build/outputs/bundle/{variant}/{PlayerSettings.productName}" :
+                    $"{PlayerSettings.productName}/build/outputs/apk/{variant}/{PlayerSettings.productName}-{variant}";
+#else
                     $"launcher/build/outputs/bundle/{variant}/launcher" :
                     $"launcher/build/outputs/apk/{variant}/launcher-{variant}";
+#endif
         }
     }
 }
