@@ -60,6 +60,7 @@ namespace UnityBuilder.StandardKit {
         }
         public struct Android {
             public string ScriptingDefineSymbols;
+            public bool UseBuildAppBundle;
             public string KeystoreName;
             public string KeystorePass;
             public string KeyaliasName;
@@ -72,6 +73,7 @@ namespace UnityBuilder.StandardKit {
 
             public override string ToString() {
                 return $"ScriptingDefineSymbols:{ScriptingDefineSymbols}, " +
+                       $"UseBuildAppBundle:{UseBuildAppBundle}, " +
                        $"KeystoreName:{KeystoreName}, " +
                        $"KeystorePass:<private>, " +
                        $"KeyaliasName:{KeyaliasName}, " +
