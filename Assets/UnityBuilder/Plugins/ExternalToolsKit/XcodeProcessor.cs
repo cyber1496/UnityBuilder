@@ -18,15 +18,17 @@ namespace UnityBuilder.ExternalToolKit {
 
 #if UNITY_EDITOR_OSX
             string scriptPath = Path.Combine(helper.RootPath, XcodeEnvironment.ScriptFilePath);
+            string logPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(scriptPath)}.log";
             string outputPath = helper.OutputPath;
             string exportOptionPlistPath = CreateExportOption(outputPath);
             try {
                 Utility.ExecuteScript(new ProcessRequest(
                     scriptPath,
+                    logPath,
                     new string[] {
-                    outputPath,
-                    EditorUserBuildSettings.development ? "Debug" : "Release",
-                    exportOptionPlistPath
+                        outputPath,
+                        EditorUserBuildSettings.development ? "Debug" : "Release",
+                        exportOptionPlistPath
                     },
                     (result) => {
                         if (result.ExitCode != 0) {

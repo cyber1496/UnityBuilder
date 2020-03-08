@@ -20,11 +20,13 @@ namespace UnityBuilder.ExternalToolKit {
             }
             string variant = GradleEnvironment.GetBuildVariant(EditorUserBuildSettings.development);
             string gradleScriptPath = Utility.ConvertPath(Path.Combine(helper.RootPath, GradleEnvironment.GradleScriptFilePath));
+            string gradleLogPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(gradleScriptPath)}.log";
             string outputPath = Utility.ConvertPath(Path.GetFullPath(helper.OutputPath));
             SetUpForUnity2018_4(Path.GetDirectoryName(gradleScriptPath), outputPath);
             try {
                 Utility.ExecuteScript(new ProcessRequest(
                     gradleScriptPath,
+                    gradleLogPath,
                     new string[] {
                         outputPath,
                         Utility.ConvertPath(GradleEnvironment.GetOutputFilePath(variant)),
@@ -37,9 +39,11 @@ namespace UnityBuilder.ExternalToolKit {
                             throw new Exception($"{gradleScriptPath} exit is {gradleResult.ExitCode}.");
                         }
                         if (EditorUserBuildSettings.buildAppBundle) {
-                            string boldToolScriptPath = Utility.ConvertPath(Path.Combine(helper.RootPath, GradleEnvironment.BuildToolScriptFilePath));
+                            string buildToolScriptPath = Utility.ConvertPath(Path.Combine(helper.RootPath, GradleEnvironment.BuildToolScriptFilePath));
+                            string buildToolLogPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(buildToolScriptPath)}.log";
                             Utility.ExecuteScript(new ProcessRequest(
-                                boldToolScriptPath,
+                                buildToolScriptPath,
+                                buildToolLogPath,
                                 new string[] {
                                     Utility.ConvertPath(GradleEnvironment.BuildToolJarPath),
                                     helper.OutputPath + helper.OutputExt,
@@ -51,7 +55,7 @@ namespace UnityBuilder.ExternalToolKit {
                                 },
                                 (boldToolResult) => {
                                     if (boldToolResult.ExitCode != 0) {
-                                        throw new Exception($"{boldToolScriptPath} exit is {boldToolResult.ExitCode}.");
+                                        throw new Exception($"{buildToolScriptPath} exit is {boldToolResult.ExitCode}.");
                                     }
                                 }
                             ));

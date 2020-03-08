@@ -8,10 +8,12 @@ using Debug = UnityEngine.Debug;
 namespace UnityBuilder.ExternalToolKit {
     public struct ProcessRequest {
         public string ScriptFilePath;
+        public string LogFilePath;
         public string[] Args;
         public Action<ProcessResult> Callback;
-        public ProcessRequest(string scriptFile, string[] args, Action<ProcessResult> callback = null) {
+        public ProcessRequest(string scriptFile, string logFilePath, string[] args, Action<ProcessResult> callback = null) {
             ScriptFilePath = scriptFile;
+            LogFilePath = logFilePath;
             Args = args;
             Callback = callback;
         }
@@ -45,18 +47,16 @@ namespace UnityBuilder.ExternalToolKit {
             return path;
         }
         public static void ExecuteScript(ProcessRequest request) {
-            context.Post((_) => EditorUtility.DisplayProgressBar("UnityBuilder.ExternalToolKit", $"ExecuteScript:{request.ScriptFilePath}", 0f), null);
+            EditorUtility.DisplayProgressBar("UnityBuilder.ExternalToolKit", $"ExecuteScript:{request.ScriptFilePath}", 0f);
             var process = CreateProcess(request);
             process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+            string message = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
-            process.CancelOutputRead();
-            process.CancelErrorRead();
             int exitCode = process.ExitCode;
-            process.Close();
-            context.Post((_) => EditorUtility.ClearProgressBar(), null);
-            context.Post((_) => request.Callback?.Invoke(new ProcessResult { ExitCode = exitCode }), null);
+            process.Dispose();
+            System.IO.File.WriteAllText(request.LogFilePath, message);
+            EditorUtility.ClearProgressBar();
+            request.Callback?.Invoke(new ProcessResult { ExitCode = exitCode });
         }
         static string ProcessFileName {
             get {
@@ -75,20 +75,6 @@ namespace UnityBuilder.ExternalToolKit {
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
-            p.OutputDataReceived += (sender, e) => {
-                context.Post((_) => {
-                    if (!string.IsNullOrEmpty(e.Data)) {
-                        Debug.Log(e.Data);
-                    }
-                }, null);
-            };
-            p.ErrorDataReceived += (sender, e) => {
-                context.Post((_) => {
-                    if (!string.IsNullOrEmpty(e.Data)) {
-                        Debug.LogError(e.Data);
-                    }
-                }, null);
-            };
             p.StartInfo.StandardOutputEncoding = Encoding.UTF8;
             return p;
         }

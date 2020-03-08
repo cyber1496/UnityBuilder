@@ -16,6 +16,8 @@ public static class Example {
         // ExportProject => XcodeProjectの編集
         BuildProvider.RegisterPostProcessor(new XcodeProcessor());
         BuildProvider.RegisterPreProcessor(presettingProcessor);
+        // Deploygate
+        BuildProvider.RegisterPostProcessor(new DeploygateProcessor());
     }
     static readonly PresettingProcessor presettingProcessor = new PresettingProcessor();
 
