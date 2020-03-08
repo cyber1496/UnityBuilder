@@ -32,6 +32,9 @@
                 <KeyaliasName>[Keyalias Name]</KeyaliasName>
                 <KeyaliasPass>[Keyalias Password]</KeyaliasPass>
             </Android>
+          <Deploygate>
+              <Authorization>[Deploygate Auth Settings File Path]</Authorization>
+          </Deploygate>
         </Scheme>
     </Schemes>
 </Configuration>
