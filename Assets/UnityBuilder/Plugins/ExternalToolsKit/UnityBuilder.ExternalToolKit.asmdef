@@ -1,5 +1,5 @@
 {
-    "name": "ExternalToolKit",
+    "name": "UnityBuilder.ExternalToolKit",
     "references": [
         "GUID:5e4452dbcd20043e9a7365d675fa7afe"
     ],

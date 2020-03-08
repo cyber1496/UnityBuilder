@@ -11,6 +11,7 @@ namespace UnityBuilder {
         BuildTargetGroup BuildTargetGroup { get; }
         BuildOptions BuildOptions { get; }
         IBuildArguments BuildArguments { get; }
+        bool IsBatchMode { get; }
 
         string GetReplacedPath(string path);
     }

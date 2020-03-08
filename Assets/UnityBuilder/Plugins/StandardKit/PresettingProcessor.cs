@@ -45,6 +45,7 @@ namespace UnityBuilder.StandardKit {
             PlayerSettings.Android.keystorePass = scheme.Android.KeystorePass;
             PlayerSettings.Android.keyaliasName = scheme.Android.KeyaliasName;
             PlayerSettings.Android.keyaliasPass = scheme.Android.KeyaliasPass;
+            EditorPrefs.SetString(Deploygate.PREFS_KEY, helper.GetReplacedPath(scheme.Deploygate.Authorization));
         }
     }
 }
