@@ -31,6 +31,7 @@ namespace UnityBuilder.StandardKit {
             public bool Development;
             public IOS IOS;
             public Android Android;
+            public Deploygate Deploygate;
             public string GetScriptingDefineSymbols(BuildTargetGroup buildTargetGroup) {
                 switch (buildTargetGroup) {
                     case BuildTargetGroup.iOS: return IOS.ScriptingDefineSymbols;
@@ -45,8 +46,9 @@ namespace UnityBuilder.StandardKit {
                        $"CompanyName:{CompanyName}, " +
                        $"ProductName:{ProductName}, " +
                        $"Development:{Development}, " +
-                       $"IOS:[{IOS.ToString()}], " +
-                       $"Android:[{Android.ToString()}]";
+                       $"IOS:[{IOS}], " +
+                       $"Android:[{Android}]" +
+                       $"Deploygate:[{Deploygate}]";
             }
         }
         public struct IOS {
@@ -81,6 +83,16 @@ namespace UnityBuilder.StandardKit {
                        $"UseCustomKeystore:{UseCustomKeystore}";
             }
         }
+
+        //todo:ExternalToolKitとの参照構成が良くない
+        public struct Deploygate {
+            public const string PREFS_KEY = "UnityBuilder.StandardKit.Deploygate.Authorization";
+            public string Authorization;
+            public override string ToString() {
+                return $"Authorization:{Authorization}";
+            }
+        }
+
         bool Load(IBuildHelper helper, string configId, string schemeId, out Scheme scheme) {
             try {
                 scheme = Load(helper)[configId].Schemes.ToDictionary(x => x.Identifier, x => x)[schemeId];

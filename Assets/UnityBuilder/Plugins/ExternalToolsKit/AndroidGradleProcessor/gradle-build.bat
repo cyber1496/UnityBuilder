@@ -1,5 +1,5 @@
-chcp 65001
 @echo off
+chcp 65001
 set SCRIPT_DIR=%~dp0
 set GRADLE_ROOT=%~1
 set OUTPUT_FILE=%~2

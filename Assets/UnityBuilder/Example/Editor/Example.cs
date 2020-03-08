@@ -13,7 +13,11 @@ public static class Example {
 
         // ExportProject => gradleによるapk出力
         BuildProvider.RegisterPostProcessor(new AndroidGradleProcessor());
+        // ExportProject => XcodeProjectの編集
+        BuildProvider.RegisterPostProcessor(new XcodeProcessor());
         BuildProvider.RegisterPreProcessor(presettingProcessor);
+        // Deploygate
+        BuildProvider.RegisterPostProcessor(new DeploygateProcessor());
     }
     static readonly PresettingProcessor presettingProcessor = new PresettingProcessor();
 

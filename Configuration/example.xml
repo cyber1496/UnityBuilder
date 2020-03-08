@@ -8,7 +8,7 @@
 			<Development>false</Development>
 			<IOS>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
-				<AppleDeveloperTeamID></AppleDeveloperTeamID>
+				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
@@ -20,6 +20,9 @@
 				<KeyaliasName>example</KeyaliasName>
                 <KeyaliasPass>example</KeyaliasPass>
 			</Android>
+			<Deploygate>
+                <Authorization>${HOME}/UnityBuilder.xml</Authorization>
+			</Deploygate>
 		</Scheme>
 		<Scheme Identifier="development">
 			<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
@@ -28,7 +31,7 @@
 			<Development>true</Development>
 			<IOS>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
-				<AppleDeveloperTeamID></AppleDeveloperTeamID>
+				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
@@ -38,6 +41,9 @@
 				<KeyaliasName>example</KeyaliasName>
                 <KeyaliasPass>example</KeyaliasPass>
 			</Android>
+			<Deploygate>
+                <Authorization>${HOME}/UnityBuilder.xml</Authorization>
+			</Deploygate>
 		</Scheme>
 	</Schemes>
 </Configuration>
