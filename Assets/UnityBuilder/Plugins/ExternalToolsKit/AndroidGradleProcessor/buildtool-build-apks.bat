@@ -1,6 +1,5 @@
-chcp 65001
 @echo off
-
+chcp 65001
 set TOOL="%~1"
 set BUNDLE=%~2
 set APKS=%~3

@@ -41,7 +41,7 @@ namespace UnityBuilder.StandardKit {
             }
         }
         public IBuildArguments BuildArguments { get; } = new BuildArguments();
-
+        public bool IsBatchMode => BuildArguments.ContainsKey("-batchmode");
         public string GetReplacedPath(string path) {
             path = path.Replace("${PROJECT_ROOT}/", RootPath);
             path = path.Replace("${HOME}", Environment.GetFolderPath(Environment.SpecialFolder.Personal));
