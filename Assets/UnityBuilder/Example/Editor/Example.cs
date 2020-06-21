@@ -14,6 +14,7 @@ public static class Example {
         // ExportProject => gradleによるapk出力
         BuildProvider.RegisterPostProcessor(new AndroidGradleProcessor());
         // ExportProject => XcodeProjectの編集
+        BuildProvider.RegisterPostProcessor(new CCacheProcessor());
         BuildProvider.RegisterPostProcessor(new XcodeProcessor());
         BuildProvider.RegisterPreProcessor(presettingProcessor);
         // Deploygate
