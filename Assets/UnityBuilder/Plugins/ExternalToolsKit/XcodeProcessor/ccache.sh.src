@@ -1,0 +1,10 @@
+#!/bin/bash
+
+which ccache
+if [ "$?" -eq 0 ]; then
+    # ※ `CCACHE_SLOPPINESS(sloppiness)`はccache.confで設定することも可能
+    export CCACHE_SLOPPINESS=pch_defines,time_macros,clang_index_store
+    exec `which ccache` [XCODE_PATH]/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Qunused-arguments "$@"
+else
+    exec [XCODE_PATH]/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Qunused-arguments "$@"
+fi
