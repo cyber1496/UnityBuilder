@@ -133,6 +133,9 @@ namespace UnityBuilder.ExternalToolKit {
 #if COMPATIBILITY_UNITY_2018_4
                     $"{PlayerSettings.productName}/build/outputs/bundle/{variant}/{PlayerSettings.productName}" :
                     $"{PlayerSettings.productName}/build/outputs/apk/{variant}/{PlayerSettings.productName}-{variant}";
+#elif UNITY_2020_1_OR_NEWER
+                    $"launcher/build/outputs/bundle/{variant}/launcher-{variant}" :
+                    $"launcher/build/outputs/apk/{variant}/launcher-{variant}";
 #else
                     $"launcher/build/outputs/bundle/{variant}/launcher" :
                     $"launcher/build/outputs/apk/{variant}/launcher-{variant}";
