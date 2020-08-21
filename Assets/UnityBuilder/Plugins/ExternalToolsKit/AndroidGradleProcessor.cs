@@ -1,4 +1,4 @@
-#if !UNITY_2019 && UNITY_2018_4_OR_NEWER
+#if !UNITY_2019_1_OR_NEWER
 #define COMPATIBILITY_UNITY_2018_4
 #endif
 using System;

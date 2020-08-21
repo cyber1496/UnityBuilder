@@ -2,7 +2,9 @@ using System;
 using System.IO;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
+#if UNITY_EDITOR_OSX
 using UnityEditor.iOS.Xcode;
+#endif
 
 namespace UnityBuilder.ExternalToolKit {
     public sealed class XcodeProcessor : IPostProcessor {
