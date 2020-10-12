@@ -14,7 +14,7 @@ namespace UnityBuilder.StandardKit {
                 if (args[i].IndexOf('-') == 0) {
                     string key = args[i];
                     string value = "";
-                    if (args[i + 1].IndexOf('-') != 0) {
+                    if (args.Length > i + 1 && args[i + 1].IndexOf('-') != 0) {
                         value = args[i + 1];
                         i++;
                     }
