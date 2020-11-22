@@ -40,6 +40,7 @@ namespace UnityBuilder.StandardKit {
             PlayerSettings.productName = scheme.ProductName;
             PlayerSettings.iOS.appleDeveloperTeamID = scheme.IOS.AppleDeveloperTeamID;
             EditorUserBuildSettings.buildAppBundle = scheme.Android.UseBuildAppBundle;
+            EditorUserBuildSettings.exportAsGoogleAndroidProject = true;
             //PlayerSettings.Android.useCustomKeystore = scheme.Android.UseCustomKeystore;
             PlayerSettings.Android.keystoreName = helper.GetReplacedPath(scheme.Android.KeystoreName);
             PlayerSettings.Android.keystorePass = scheme.Android.KeystorePass;

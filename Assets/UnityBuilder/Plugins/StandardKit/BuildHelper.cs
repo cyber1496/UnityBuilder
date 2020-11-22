@@ -12,10 +12,11 @@ namespace UnityBuilder.StandardKit {
             get {
                 switch (BuildTarget) {
                     case BuildTarget.Android:
+                        bool exportExternalProject = EditorUserBuildSettings.exportAsGoogleAndroidProject;
+                        return $"build/{BuildTarget}/{OutputFile}" + (exportExternalProject ? "" : $"{OutputExt}");
                     case BuildTarget.StandaloneWindows:
                     case BuildTarget.StandaloneWindows64:
-                        bool exportExternalProject = BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer);
-                        return $"build/{BuildTarget}/{OutputFile}" + (exportExternalProject ? "" : $"{OutputExt}");
+                        return $"build/{BuildTarget}/{OutputFile}{OutputExt}";
                     case BuildTarget.StandaloneOSX:
                     case BuildTarget.iOS:
                         return $"build/{BuildTarget}/{OutputFile}";
@@ -42,11 +43,7 @@ namespace UnityBuilder.StandardKit {
         public BuildTargetGroup BuildTargetGroup => EditorUserBuildSettings.selectedBuildTargetGroup;
         public BuildOptions BuildOptions {
             get {
-                var opt = BuildOptions.None;
-                switch (BuildTarget) {
-                    case BuildTarget.Android: opt |= BuildOptions.AcceptExternalModificationsToPlayer; break;
-                }
-                return opt;
+                return BuildOptions.None;
             }
         }
         public IBuildArguments BuildArguments { get; } = new BuildArguments();
