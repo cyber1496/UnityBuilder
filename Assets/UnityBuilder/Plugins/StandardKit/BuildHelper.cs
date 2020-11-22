@@ -1,16 +1,26 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
 namespace UnityBuilder.StandardKit {
     public class BuildHelper : IBuildHelper {
         public string RootPath => Application.dataPath.Replace("Assets", "");
-        public string[] TargetScenes => new string[] { };
+        public string[] TargetScenes => (from scene in EditorBuildSettings.scenes select scene.path).ToArray();
         public string OutputPath {
             get {
-                bool exportExternalProject = BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer);
-                return $"build/{BuildTarget}/{OutputFile}" + (exportExternalProject ? "" : $"{OutputExt}");
+                switch (BuildTarget) {
+                    case BuildTarget.Android:
+                    case BuildTarget.StandaloneWindows:
+                    case BuildTarget.StandaloneWindows64:
+                        bool exportExternalProject = BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer);
+                        return $"build/{BuildTarget}/{OutputFile}" + (exportExternalProject ? "" : $"{OutputExt}");
+                    case BuildTarget.StandaloneOSX:
+                    case BuildTarget.iOS:
+                        return $"build/{BuildTarget}/{OutputFile}";
+                    default: return "";
+                }
             }
         }
         public string OutputFile => PlayerSettings.productName;
@@ -34,8 +44,7 @@ namespace UnityBuilder.StandardKit {
             get {
                 var opt = BuildOptions.None;
                 switch (BuildTarget) {
-                    case BuildTarget.Android:
-                    case BuildTarget.iOS: opt |= BuildOptions.AcceptExternalModificationsToPlayer; break;
+                    case BuildTarget.Android: opt |= BuildOptions.AcceptExternalModificationsToPlayer; break;
                 }
                 return opt;
             }

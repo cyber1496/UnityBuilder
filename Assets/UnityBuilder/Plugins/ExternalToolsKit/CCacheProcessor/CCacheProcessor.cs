@@ -13,9 +13,9 @@ namespace UnityBuilder.ExternalToolKit {
             if (helper.BuildTarget != BuildTarget.iOS) {
                 return;
             }
-            if (!helper.BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer)) {
-                return;
-            }
+            // if (!helper.BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer)) {
+            //     return;
+            // }
 
 #if UNITY_EDITOR_OSX
             Environment.SetupScript(helper);

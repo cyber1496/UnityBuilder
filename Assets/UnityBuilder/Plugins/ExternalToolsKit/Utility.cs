@@ -49,6 +49,7 @@ namespace UnityBuilder.ExternalToolKit {
         public static void ExecuteScript(ProcessRequest request) {
             EditorUtility.DisplayProgressBar("UnityBuilder.ExternalToolKit", $"ExecuteScript:{request.ScriptFilePath}", 0f);
             var process = CreateProcess(request);
+            Debug.Log($"[{request.ProcessArguments}]");
             process.Start();
             string message = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
