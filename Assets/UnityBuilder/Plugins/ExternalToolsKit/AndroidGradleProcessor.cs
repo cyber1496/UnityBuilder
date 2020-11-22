@@ -15,7 +15,7 @@ namespace UnityBuilder.ExternalToolKit {
             if (helper.BuildTarget != BuildTarget.Android) {
                 return;
             }
-            if (!helper.BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer)) {
+            if (!EditorUserBuildSettings.exportAsGoogleAndroidProject) {
                 return;
             }
             string variant = GradleEnvironment.GetBuildVariant(EditorUserBuildSettings.development);
