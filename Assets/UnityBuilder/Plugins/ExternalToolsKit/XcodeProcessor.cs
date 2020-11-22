@@ -24,13 +24,16 @@ namespace UnityBuilder.ExternalToolKit {
             string outputPath = helper.OutputPath;
             string exportOptionPlistPath = CreateExportOption(outputPath);
             try {
+                var chunk = PlayerSettings.GetApplicationIdentifier(BuildTargetGroup.iOS).Split('.');
+                var ipaName = chunk[chunk.Length - 1];
                 Utility.ExecuteScript(new ProcessRequest(
                     scriptPath,
                     logPath,
                     new string[] {
                         outputPath,
                         EditorUserBuildSettings.development ? "Debug" : "Release",
-                        exportOptionPlistPath
+                        exportOptionPlistPath,
+                        ipaName
                     },
                     (result) => {
                         if (result.ExitCode != 0) {
