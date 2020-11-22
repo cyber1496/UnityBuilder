@@ -1,4 +1,4 @@
-#if !UNITY_2019 && UNITY_2018_4_OR_NEWER
+#if !UNITY_2019_1_OR_NEWER
 #define COMPATIBILITY_UNITY_2018_4
 #endif
 using System;
@@ -15,7 +15,7 @@ namespace UnityBuilder.ExternalToolKit {
             if (helper.BuildTarget != BuildTarget.Android) {
                 return;
             }
-            if (!helper.BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer)) {
+            if (!EditorUserBuildSettings.exportAsGoogleAndroidProject) {
                 return;
             }
             string variant = GradleEnvironment.GetBuildVariant(EditorUserBuildSettings.development);
@@ -133,6 +133,9 @@ namespace UnityBuilder.ExternalToolKit {
 #if COMPATIBILITY_UNITY_2018_4
                     $"{PlayerSettings.productName}/build/outputs/bundle/{variant}/{PlayerSettings.productName}" :
                     $"{PlayerSettings.productName}/build/outputs/apk/{variant}/{PlayerSettings.productName}-{variant}";
+#elif UNITY_2020_1_OR_NEWER
+                    $"launcher/build/outputs/bundle/{variant}/launcher-{variant}" :
+                    $"launcher/build/outputs/apk/{variant}/launcher-{variant}";
 #else
                     $"launcher/build/outputs/bundle/{variant}/launcher" :
                     $"launcher/build/outputs/apk/{variant}/launcher-{variant}";

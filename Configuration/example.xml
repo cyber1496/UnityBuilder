@@ -35,7 +35,7 @@
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
-				<UseBuildAppBundle>false</UseBuildAppBundle>
+				<UseBuildAppBundle>true</UseBuildAppBundle>
 				<KeystoreName>Configuration/example.keystore</KeystoreName>
                 <KeystorePass>example</KeystorePass>
 				<KeyaliasName>example</KeyaliasName>

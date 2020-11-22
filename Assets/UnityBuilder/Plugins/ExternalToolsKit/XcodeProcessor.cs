@@ -2,7 +2,9 @@ using System;
 using System.IO;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
+#if UNITY_EDITOR_OSX
 using UnityEditor.iOS.Xcode;
+#endif
 
 namespace UnityBuilder.ExternalToolKit {
     public sealed class XcodeProcessor : IPostProcessor {
@@ -12,9 +14,6 @@ namespace UnityBuilder.ExternalToolKit {
             if (helper.BuildTarget != BuildTarget.iOS) {
                 return;
             }
-            if (!helper.BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer)) {
-                return;
-            }
 
 #if UNITY_EDITOR_OSX
             string scriptPath = Path.Combine(helper.RootPath, XcodeEnvironment.ScriptFilePath);
@@ -22,13 +21,16 @@ namespace UnityBuilder.ExternalToolKit {
             string outputPath = helper.OutputPath;
             string exportOptionPlistPath = CreateExportOption(outputPath);
             try {
+                var chunk = PlayerSettings.GetApplicationIdentifier(BuildTargetGroup.iOS).Split('.');
+                var ipaName = chunk[chunk.Length - 1];
                 Utility.ExecuteScript(new ProcessRequest(
                     scriptPath,
                     logPath,
                     new string[] {
                         outputPath,
                         EditorUserBuildSettings.development ? "Debug" : "Release",
-                        exportOptionPlistPath
+                        exportOptionPlistPath,
+                        ipaName
                     },
                     (result) => {
                         if (result.ExitCode != 0) {

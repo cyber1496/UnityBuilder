@@ -2,16 +2,15 @@ using System;
 using System.IO;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
+#if UNITY_EDITOR_OSX
 using UnityEditor.iOS.Xcode;
+#endif
 
 namespace UnityBuilder.ExternalToolKit {
     public sealed class CCacheProcessor : IPostProcessor {
         public int PostOrder => 9;
         public void PostProcess(IBuildHelper helper) {
             if (helper.BuildTarget != BuildTarget.iOS) {
-                return;
-            }
-            if (!helper.BuildOptions.HasFlag(BuildOptions.AcceptExternalModificationsToPlayer)) {
                 return;
             }
 
@@ -22,7 +21,7 @@ namespace UnityBuilder.ExternalToolKit {
 #if UNITY_EDITOR_OSX
         static class Environment {
             static string XcodePath
-                => "/Applications/Xcode.app";
+                => "/Applications/Xcode12.2.app";
             static string ScriptFileName
                 => "ccache.sh";
             static string ScriptSrcFilePath
