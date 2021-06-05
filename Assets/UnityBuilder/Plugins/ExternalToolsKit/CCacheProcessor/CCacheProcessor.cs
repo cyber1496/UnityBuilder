@@ -21,7 +21,7 @@ namespace UnityBuilder.ExternalToolKit {
 #if UNITY_EDITOR_OSX
         static class Environment {
             static string XcodePath
-                => "/Applications/Xcode12.2.app";
+                => "/Applications/Xcode12.5.app";
             static string ScriptFileName
                 => "ccache.sh";
             static string ScriptSrcFilePath

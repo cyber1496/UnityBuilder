@@ -3,7 +3,6 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 OUTPUT_DIR=$1
 CONFIG=$2
 EXPORT_OPTION_PLIST_PATH=$3
-IPA_NAME=$4
 
 ARCHIVE_PATH=$OUTPUT_DIR.xcarchive
 OUTPUT_PATH=$OUTPUT_DIR.export
@@ -12,7 +11,7 @@ SCHEME=Unity-iPhone
 xcodebuild -version
 
 xcodebuild \
-    -workspace $OUTPUT_DIR/$SCHEME.xcodeproj/project.xcworkspace \
+    -project $OUTPUT_DIR/$SCHEME.xcodeproj \
     -scheme $SCHEME \
     -configuration $CONFIG \
     archive -archivePath $ARCHIVE_PATH
@@ -22,4 +21,7 @@ xcodebuild -exportArchive \
     -exportPath $OUTPUT_PATH \
     -exportOptionsPlist $EXPORT_OPTION_PLIST_PATH
 
-cp $OUTPUT_PATH/$IPA_NAME.ipa $OUTPUT_DIR.ipa
+for IPA_FILE in `find $OUTPUT_PATH -name "*.ipa"`; do
+    cp $IPA_FILE $OUTPUT_DIR.ipa
+    break
+done

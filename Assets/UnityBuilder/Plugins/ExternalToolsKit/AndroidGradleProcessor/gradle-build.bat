@@ -9,7 +9,6 @@ set USE_APP_BUNDLE=%~5
 
 cd %GRADLE_ROOT%
 xcopy /Q /Y /I /E %SCRIPT_DIR%\gradle %GRADLE_ROOT%\gradle > nul
-copy /Y %SCRIPT_DIR%\gradle.properties %GRADLE_ROOT%\gradle.properties > nul
 copy /Y %SCRIPT_DIR%\gradlew %GRADLE_ROOT%\gradlew > nul
 copy /Y %SCRIPT_DIR%\gradlew.bat %GRADLE_ROOT%\gradlew.bat > nul
 if %USE_APP_BUNDLE% == True (
