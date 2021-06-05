@@ -11,6 +11,8 @@ SCHEME=Unity-iPhone
 
 xcodebuild -version
 
+PRODUCT_NAME=$IPA_NAME
+
 xcodebuild \
     -workspace $OUTPUT_DIR/$SCHEME.xcodeproj/project.xcworkspace \
     -scheme $SCHEME \
