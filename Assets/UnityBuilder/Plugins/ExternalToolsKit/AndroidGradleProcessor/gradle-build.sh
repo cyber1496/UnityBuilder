@@ -8,7 +8,6 @@ USE_APP_BUNDLE=$5
 
 cd $GRADLE_ROOT
 cp -r $SCRIPT_DIR/gradle $GRADLE_ROOT/gradle
-cp $SCRIPT_DIR/gradle.properties $GRADLE_ROOT/gradle.properties
 cp $SCRIPT_DIR/gradlew $GRADLE_ROOT/gradlew
 cp $SCRIPT_DIR/gradlew.bat $GRADLE_ROOT/gradlew.bat
 chmod 755 $GRADLE_ROOT/gradlew
