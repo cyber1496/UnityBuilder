@@ -17,7 +17,7 @@ namespace UnityBuilder.StandardKit {
             public override string ToString() {
                 string scehmes = "";
                 foreach (var scehme in Schemes) {
-                    scehmes += $"{scehme.ToString()},\n";
+                    scehmes += $"{scehme},\n";
                 }
                 scehmes = scehmes.TrimEnd(',', '\n');
                 return $"Identifier:{Identifier}, Schemes[\n{scehmes}\n]";
@@ -32,13 +32,11 @@ namespace UnityBuilder.StandardKit {
             public IOS IOS;
             public Android Android;
             public Deploygate Deploygate;
-            public string GetScriptingDefineSymbols(BuildTargetGroup buildTargetGroup) {
-                switch (buildTargetGroup) {
-                    case BuildTargetGroup.iOS: return IOS.ScriptingDefineSymbols;
-                    case BuildTargetGroup.Android: return Android.ScriptingDefineSymbols;
-                    default: return "";
-                }
-            }
+            public string GetScriptingDefineSymbols(BuildTargetGroup buildTargetGroup) => buildTargetGroup switch {
+                BuildTargetGroup.iOS => IOS.ScriptingDefineSymbols,
+                BuildTargetGroup.Android => Android.ScriptingDefineSymbols,
+                _ => "",
+            };
 
             public override string ToString() {
                 return $"Identifier:{Identifier}, " +
@@ -119,10 +117,9 @@ namespace UnityBuilder.StandardKit {
             return collect;
         }
         Configuration Load(string filePath, XmlReaderSettings xmlSettings, XmlSerializer serializer) {
-            using (var streamReader = new StreamReader(filePath, Encoding.UTF8))
-            using (var xmlReader = XmlReader.Create(streamReader, xmlSettings)) {
-                return (Configuration)serializer.Deserialize(xmlReader);
-            }
+            using var streamReader = new StreamReader(filePath, Encoding.UTF8);
+            using var xmlReader = XmlReader.Create(streamReader, xmlSettings);
+            return (Configuration)serializer.Deserialize(xmlReader);
         }
     }
 }
