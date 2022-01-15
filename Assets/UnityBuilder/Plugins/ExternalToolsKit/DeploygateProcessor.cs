@@ -55,10 +55,9 @@ namespace UnityBuilder.ExternalToolKit {
                 var xmlSettings = new XmlReaderSettings() {
                     CheckCharacters = false,
                 };
-                using (var streamReader = new StreamReader(filePath, Encoding.UTF8))
-                using (var xmlReader = XmlReader.Create(streamReader, xmlSettings)) {
-                    return (Authorization)serializer.Deserialize(xmlReader);
-                }
+                using var streamReader = new StreamReader(filePath, Encoding.UTF8);
+                using var xmlReader = XmlReader.Create(streamReader, xmlSettings);
+                return (Authorization)serializer.Deserialize(xmlReader);
             }
         }
         static class XcodeEnvironment {
