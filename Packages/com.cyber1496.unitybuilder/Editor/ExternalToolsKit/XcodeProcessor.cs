@@ -58,7 +58,7 @@ namespace UnityBuilder.ExternalToolKit {
             static string ScriptFileName
                 => "xcode-build.sh";
             public static string ScriptFilePath
-                => $"Assets/UnityBuilder/Plugins/ExternalToolsKit/XcodeProcessor/{ScriptFileName}";
+                => $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/XcodeProcessor/{ScriptFileName}";
         }
 #endif
     }
