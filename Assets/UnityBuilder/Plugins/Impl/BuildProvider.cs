@@ -12,8 +12,8 @@ namespace UnityBuilder {
         static IBuildHelper buildeHelper = new BuildHelper();
         static IBuildLogHandler buildLogHandler = new BuildLogHandler();
         static IProcessor processor = new Processor();
-        static readonly SortedDictionary<int, List<IPreProcessor>> preProcessores = new();
-        static readonly SortedDictionary<int, List<IPostProcessor>> postProcessores = new();
+        static readonly SortedDictionary<int, List<IPreProcessor>> preProcessores = new SortedDictionary<int, List<IPreProcessor>>();
+        static readonly SortedDictionary<int, List<IPostProcessor>> postProcessores = new SortedDictionary<int, List<IPostProcessor>>();
 
         public static RegisterState RegisterBuildHelper(IBuildHelper newBuildHelper) {
             var state = buildeHelper is BuildHelper || newBuildHelper is BuildHelper ? RegisterState.Success : RegisterState.Duplicated;
