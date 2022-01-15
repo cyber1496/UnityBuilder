@@ -32,6 +32,14 @@ namespace UnityBuilder.ExternalToolKit {
     }
 
     public static class Utility {
+#pragma warning disable IDE0051 // どこからも参照されない
+        [InitializeOnLoadMethod]
+        static void OnInitializeOnLoad() {
+            context = SynchronizationContext.Current;
+        }
+#pragma warning restore IDE0051
+
+        static SynchronizationContext context = null;
         public static string ConvertPath(string path) {
 #if UNITY_EDITOR_WIN
             path = path.Replace("/", "\\");

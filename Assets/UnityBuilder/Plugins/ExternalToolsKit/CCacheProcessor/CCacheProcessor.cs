@@ -27,7 +27,7 @@ namespace UnityBuilder.ExternalToolKit {
             static string ScriptSrcFilePath
                 => $"Assets/UnityBuilder/Plugins/ExternalToolsKit/XcodeProcessor/{ScriptFileName}.src";
             static string ChmodScriptFilePath
-                => "Assets/UnityBuilder/Plugins/ExternalToolsKit/CCacheProcessor/chmod.sh";
+                = "Assets/UnityBuilder/Plugins/ExternalToolsKit/CCacheProcessor/chmod.sh";
             public static void SetupScript(IBuildHelper helper) {
                 string inputScriptPath = Path.Combine(helper.RootPath, ScriptSrcFilePath);
                 string outputScriptPath = Path.Combine(helper.OutputPath, ScriptFileName);
