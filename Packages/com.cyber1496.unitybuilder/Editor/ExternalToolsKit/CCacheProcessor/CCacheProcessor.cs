@@ -29,12 +29,13 @@ namespace UnityBuilder.ExternalToolKit {
             static string ChmodScriptFilePath
                 => "Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/CCacheProcessor/chmod.sh";
             public static void SetupScript(IBuildHelper helper) {
+                string chmodScriptFilePath = Path.Combine(helper.RootPath, ChmodScriptFilePath);
                 string inputScriptPath = Path.Combine(helper.RootPath, ScriptSrcFilePath);
                 string outputScriptPath = Path.Combine(helper.OutputPath, ScriptFileName);
                 File.WriteAllText(outputScriptPath, File.ReadAllText(inputScriptPath).Replace("[XCODE_PATH]", XcodePath));
 
                 Utility.ExecuteScript(new ProcessRequest(
-                    ChmodScriptFilePath,
+                    chmodScriptFilePath,
                     "Logs/chmod.log",
                     new string[] { "555", Path.GetFullPath(outputScriptPath) }
                 ));
