@@ -20,7 +20,7 @@ public static class Example {
         // Deploygate
         BuildProvider.RegisterPostProcessor(new DeploygateProcessor());
     }
-    static readonly PresettingProcessor presettingProcessor = new();
+    static readonly PresettingProcessor presettingProcessor = new PresettingProcessor();
 
 #pragma warning disable IDE0051 // MenuItemはどこからも参照されない
     [MenuItem("Tools/Build/DoIt")] static void DoIt() => BuildProvider.Process();
