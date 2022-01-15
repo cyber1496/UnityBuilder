@@ -110,7 +110,7 @@ namespace UnityBuilder.ExternalToolKit {
 #if COMPATIBILITY_UNITY_2018_4
                 "bundletool-all-0.6.0.jar";
 #else
-                "bundletool-all-0.10.3.jar";
+                "bundletool-all-1.6.0.jar";
 #endif
             public static string BuildToolJarPath =>
 #if UNITY_EDITOR_WIN
