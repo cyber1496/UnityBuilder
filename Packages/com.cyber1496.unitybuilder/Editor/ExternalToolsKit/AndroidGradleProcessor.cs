@@ -105,7 +105,7 @@ namespace UnityBuilder.ExternalToolKit {
                 "gradle-build.sh";
 #endif
             public static string GradleScriptFilePath =>
-                $"Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/{GradleScriptFileName}";
+                $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/AndroidGradleProcessor/{GradleScriptFileName}";
             public static string BuildToolJarFileName =>
 #if COMPATIBILITY_UNITY_2018_4
                 "bundletool-all-0.6.0.jar";
@@ -125,7 +125,7 @@ namespace UnityBuilder.ExternalToolKit {
                     "buildtool-build-apks.sh";
 #endif
             public static string BuildToolScriptFilePath =>
-                $"Assets/UnityBuilder/Plugins/ExternalToolsKit/AndroidGradleProcessor/{BuildToolScriptFileName}";
+                $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/AndroidGradleProcessor/{BuildToolScriptFileName}";
             public static string GetBuildVariant(bool isDevelopment) =>
                 isDevelopment ? "debug" : "release";
             public static string GetOutputFilePath(string variant) =>

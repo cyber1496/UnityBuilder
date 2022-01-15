@@ -1,0 +1,8 @@
+{
+	"name": "com.cyber1496.unitybuilder",
+	"displayName": "UnityBuilder",
+	"version": "1.7.0",
+	"unity": "2020.3",
+	"description": "UnityBuilder",
+	"dependencies": {}
+}

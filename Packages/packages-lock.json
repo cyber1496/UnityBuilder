@@ -342,6 +342,12 @@
         "com.unity.modules.jsonserialize": "1.0.0",
         "com.unity.modules.subsystems": "1.0.0"
       }
+    },
+    "com.cyber1496.unitybuilder": {
+      "version": "file:com.cyber1496.unitybuilder",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
     }
   }
 }
