@@ -15,7 +15,7 @@ namespace UnityBuilder.ExternalToolKit {
             if (!authorization.IsEnable) {
                 return;
             }
-            string scriptPath = Path.Combine(helper.RootPath, XcodeEnvironment.ScriptFilePath);
+            string scriptPath = DeployGateEnvironment.ScriptFilePath;
             string logPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(scriptPath)}.log";
             string outputPath = helper.OutputPath;
             try {
@@ -60,7 +60,7 @@ namespace UnityBuilder.ExternalToolKit {
                 return (Authorization)serializer.Deserialize(xmlReader);
             }
         }
-        static class XcodeEnvironment {
+        static class DeployGateEnvironment {
             static string ScriptFileName
 #if UNITY_EDITOR_WIN
                 => "deploygate.bat";
@@ -68,7 +68,7 @@ namespace UnityBuilder.ExternalToolKit {
                 => "deploygate.sh";
 #endif
             public static string ScriptFilePath
-                => $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/DeploygateProcessor/{ScriptFileName}";
+                => Path.GetFullPath($"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/DeploygateProcessor/{ScriptFileName}");
         }
     }
 }

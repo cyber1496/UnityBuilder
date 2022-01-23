@@ -16,7 +16,7 @@ namespace UnityBuilder.ExternalToolKit {
             }
 
 #if UNITY_EDITOR_OSX
-            string scriptPath = Path.Combine(helper.RootPath, XcodeEnvironment.ScriptFilePath);
+            string scriptPath = XcodeEnvironment.ScriptFilePath;
             string logPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(scriptPath)}.log";
             string outputPath = helper.OutputPath;
             string exportOptionPlistPath = CreateExportOption(outputPath);
@@ -58,7 +58,7 @@ namespace UnityBuilder.ExternalToolKit {
             static string ScriptFileName
                 => "xcode-build.sh";
             public static string ScriptFilePath
-                => $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/XcodeProcessor/{ScriptFileName}";
+                => Path.GetFullPath($"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/XcodeProcessor/{ScriptFileName}");
         }
 #endif
     }

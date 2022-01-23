@@ -19,7 +19,7 @@ namespace UnityBuilder.ExternalToolKit {
                 return;
             }
             string variant = GradleEnvironment.GetBuildVariant(EditorUserBuildSettings.development);
-            string gradleScriptPath = Utility.ConvertPath(Path.Combine(helper.RootPath, GradleEnvironment.GradleScriptFilePath));
+            string gradleScriptPath = GradleEnvironment.GradleScriptFilePath;
             string gradleLogPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(gradleScriptPath)}.log";
             string outputPath = Utility.ConvertPath(Path.GetFullPath(helper.OutputPath));
             SetUpForUnity2018_4(Path.GetDirectoryName(gradleScriptPath), outputPath);
@@ -39,7 +39,7 @@ namespace UnityBuilder.ExternalToolKit {
                             throw new Exception($"{gradleScriptPath} exit is {gradleResult.ExitCode}.");
                         }
                         if (EditorUserBuildSettings.buildAppBundle) {
-                            string buildToolScriptPath = Utility.ConvertPath(Path.Combine(helper.RootPath, GradleEnvironment.BuildToolScriptFilePath));
+                            string buildToolScriptPath = GradleEnvironment.BuildToolScriptFilePath;
                             string buildToolLogPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(buildToolScriptPath)}.log";
                             Utility.ExecuteScript(new ProcessRequest(
                                 buildToolScriptPath,
@@ -105,7 +105,7 @@ namespace UnityBuilder.ExternalToolKit {
                 "gradle-build.sh";
 #endif
             public static string GradleScriptFilePath =>
-                $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/AndroidGradleProcessor/{GradleScriptFileName}";
+                Path.GetFullPath($"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/AndroidGradleProcessor/{GradleScriptFileName}");
             public static string BuildToolJarFileName =>
 #if COMPATIBILITY_UNITY_2018_4
                 "bundletool-all-0.6.0.jar";
@@ -125,7 +125,7 @@ namespace UnityBuilder.ExternalToolKit {
                     "buildtool-build-apks.sh";
 #endif
             public static string BuildToolScriptFilePath =>
-                $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/AndroidGradleProcessor/{BuildToolScriptFileName}";
+                Path.GetFullPath($"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/AndroidGradleProcessor/{BuildToolScriptFileName}");
             public static string GetBuildVariant(bool isDevelopment) =>
                 isDevelopment ? "debug" : "release";
             public static string GetOutputFilePath(string variant) =>

@@ -25,16 +25,17 @@ namespace UnityBuilder.ExternalToolKit {
             static string ScriptFileName
                 => "ccache.sh";
             static string ScriptSrcFilePath
-                => $"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/XcodeProcessor/{ScriptFileName}.src";
+                => Path.GetFullPath($"Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/XcodeProcessor/{ScriptFileName}.src");
             static string ChmodScriptFilePath
-                => "Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/CCacheProcessor/chmod.sh";
+                => Path.GetFullPath("Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/CCacheProcessor/chmod.sh");
             public static void SetupScript(IBuildHelper helper) {
-                string inputScriptPath = Path.Combine(helper.RootPath, ScriptSrcFilePath);
+                string chmodScriptFilePath = ChmodScriptFilePath;
+                string inputScriptPath = ScriptSrcFilePath;
                 string outputScriptPath = Path.Combine(helper.OutputPath, ScriptFileName);
                 File.WriteAllText(outputScriptPath, File.ReadAllText(inputScriptPath).Replace("[XCODE_PATH]", XcodePath));
 
                 Utility.ExecuteScript(new ProcessRequest(
-                    ChmodScriptFilePath,
+                    chmodScriptFilePath,
                     "Logs/chmod.log",
                     new string[] { "555", Path.GetFullPath(outputScriptPath) }
                 ));
