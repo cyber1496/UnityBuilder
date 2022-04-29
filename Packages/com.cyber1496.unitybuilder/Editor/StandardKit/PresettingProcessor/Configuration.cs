@@ -53,9 +53,14 @@ namespace UnityBuilder.StandardKit {
             public string ScriptingDefineSymbols;
             public string AppleDeveloperTeamID;
 
+            public string XcodePath;
+
+            public const string PREFS_KEY_XCODE_PATH = "UnityBuilder.StandardKit.iOS.XcodePath";
+
             public override string ToString() {
                 return $"ScriptingDefineSymbols:{ScriptingDefineSymbols}, " +
-                       $"AppleDeveloperTeamID:{AppleDeveloperTeamID}";
+                       $"AppleDeveloperTeamID:{AppleDeveloperTeamID}," +
+                       $"XcodePath:{XcodePath}";
             }
         }
         public struct Android {

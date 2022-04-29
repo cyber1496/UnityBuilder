@@ -16,6 +16,7 @@ namespace UnityBuilder.ExternalToolKit {
             }
 
 #if UNITY_EDITOR_OSX
+            string xcodePath = EditorPrefs.GetString("UnityBuilder.StandardKit.iOS.XcodePath");
             string scriptPath = XcodeEnvironment.ScriptFilePath;
             string logPath = $"Logs/{helper.BuildTarget}/{Path.GetFileName(scriptPath)}.log";
             string outputPath = helper.OutputPath;
@@ -27,6 +28,7 @@ namespace UnityBuilder.ExternalToolKit {
                     logPath,
                     new string[] {
                         outputPath,
+                        xcodePath,
                         EditorUserBuildSettings.development ? "Debug" : "Release",
                         exportOptionPlistPath
                     },
