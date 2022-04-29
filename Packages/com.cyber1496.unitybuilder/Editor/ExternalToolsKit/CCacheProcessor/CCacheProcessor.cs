@@ -20,8 +20,6 @@ namespace UnityBuilder.ExternalToolKit {
         }
 #if UNITY_EDITOR_OSX
         static class Environment {
-            static string XcodePath
-                => "/Applications/Xcode13.3.1.app";
             static string ScriptFileName
                 => "ccache.sh";
             static string ScriptSrcFilePath
@@ -29,10 +27,14 @@ namespace UnityBuilder.ExternalToolKit {
             static string ChmodScriptFilePath
                 => Path.GetFullPath("Packages/com.cyber1496.unitybuilder/Editor/ExternalToolsKit/CCacheProcessor/chmod.sh");
             public static void SetupScript(IBuildHelper helper) {
+                string xcodePath = EditorPrefs.GetString("UnityBuilder.StandardKit.iOS.XcodePath");
                 string chmodScriptFilePath = ChmodScriptFilePath;
                 string inputScriptPath = ScriptSrcFilePath;
                 string outputScriptPath = Path.Combine(helper.OutputPath, ScriptFileName);
-                File.WriteAllText(outputScriptPath, File.ReadAllText(inputScriptPath).Replace("[XCODE_PATH]", XcodePath));
+                if (File.Exists(outputScriptPath)) {
+                    File.Delete(outputScriptPath);
+                }
+                File.WriteAllText(outputScriptPath, File.ReadAllText(inputScriptPath).Replace("[XCODE_PATH]", xcodePath));
 
                 Utility.ExecuteScript(new ProcessRequest(
                     chmodScriptFilePath,

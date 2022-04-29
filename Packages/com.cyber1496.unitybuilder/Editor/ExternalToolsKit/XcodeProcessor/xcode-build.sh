@@ -1,14 +1,15 @@
 #!/bin/zsh
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 OUTPUT_DIR=$1
-CONFIG=$2
-EXPORT_OPTION_PLIST_PATH=$3
+XCODE_PATH=$2
+CONFIG=$3
+EXPORT_OPTION_PLIST_PATH=$4
 
 ARCHIVE_PATH=$OUTPUT_DIR.xcarchive
 OUTPUT_PATH=$OUTPUT_DIR.export
 SCHEME=Unity-iPhone
 
-xcodebuild -version
+export DEVELOPER_DIR=/${XCODE_PATH} xcodebuild -version
 
 xcodebuild \
     -project $OUTPUT_DIR/$SCHEME.xcodeproj \
