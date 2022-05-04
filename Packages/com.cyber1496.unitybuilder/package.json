@@ -4,5 +4,7 @@
 	"version": "1.9.0",
 	"unity": "2020.3",
 	"description": "UnityBuilder",
-	"dependencies": {}
+	"dependencies": {
+		"com.unity.scriptablebuildpipeline": "1.19.6"
+	}
 }

@@ -1,7 +1,9 @@
 {
     "name": "com.cyber1496.unitybuilder",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:c5ecc461727906345a35491a0440694f"
+    ],
     "includePlatforms": [
         "Editor"
     ],

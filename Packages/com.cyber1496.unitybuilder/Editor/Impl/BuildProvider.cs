@@ -1,65 +1,53 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
-
+using UnityEngine;
+using UnityEditor;
+using UnityEditor.Build.Pipeline;
+using UnityEditor.Build.Pipeline.Tasks;
+using UnityEditor.Build.Pipeline.Utilities;
+using UnityEditor.Build.Reporting;
 namespace UnityBuilder {
-    using UnityEditor.Build.Reporting;
-    using StandardKit;
-    public enum RegisterState : int {
-        Success, Duplicated,
-    }
-    public static class BuildProvider {
-        static IBuildHelper buildeHelper = new BuildHelper();
-        static IBuildLogHandler buildLogHandler = new BuildLogHandler();
-        static IProcessor processor = new Processor();
-        static readonly SortedDictionary<int, List<IPreProcessor>> preProcessores = new SortedDictionary<int, List<IPreProcessor>>();
-        static readonly SortedDictionary<int, List<IPostProcessor>> postProcessores = new SortedDictionary<int, List<IPostProcessor>>();
+    public sealed class BuildProvider {
+        private readonly BuildProviderSettingAsset settings;
+        public BuildProvider(BuildProviderSettingAsset settings) {
+            this.settings = settings;
+        }
+        public ReturnCode DryRun() {
 
-        public static RegisterState RegisterBuildHelper(IBuildHelper newBuildHelper) {
-            var state = buildeHelper is BuildHelper || newBuildHelper is BuildHelper ? RegisterState.Success : RegisterState.Duplicated;
-            buildeHelper = newBuildHelper;
-            return state;
+            var logHandler = settings.GetBuildLogHandler();
+            logHandler.Apply();
+
+            var helper = settings.GetBuildHelper();
+            var contexts = new BuildContext();
+            contexts.SetContextObject(new BundleBuildParameters(helper.BuildTarget, helper.BuildTargetGroup, Application.streamingAssetsPath));
+            contexts.SetContextObject(new BuildInterfacesWrapper());
+            contexts.SetContextObject(new BuildResults());
+            contexts.SetContextObject(new BuildCallbacks());
+
+            ReturnCode returnCode = BuildTasksRunner.Run(DefaultBuildTasks.Create(DefaultBuildTasks.Preset.PlayerScriptsOnly), contexts);
+
+            logHandler.Revert();
+
+            return returnCode;
         }
-        public static RegisterState RegisterBuildLogHandler(IBuildLogHandler newBuildLogHandler) {
-            var state = buildeHelper is BuildLogHandler || newBuildLogHandler is BuildLogHandler ? RegisterState.Success : RegisterState.Duplicated;
-            buildLogHandler = newBuildLogHandler;
-            return state;
-        }
-        public static RegisterState RegisterProcessor(IProcessor newProcessor) {
-            var state = processor is Processor || newProcessor is BuildHelper ? RegisterState.Success : RegisterState.Duplicated;
-            processor = newProcessor;
-            return state;
-        }
-        public static RegisterState RegisterPreProcessor(IPreProcessor preProcessor) {
-            var state = preProcessores.ContainsKey(preProcessor.PreOrder) ? RegisterState.Duplicated : RegisterState.Success;
-            if (!preProcessores.ContainsKey(preProcessor.PreOrder)) {
-                preProcessores.Add(preProcessor.PreOrder, new List<IPreProcessor>());
+        public ReturnCode Run() {
+
+            var logHandler = settings.GetBuildLogHandler();
+            logHandler.Apply();
+
+            var helper = settings.GetBuildHelper();
+            var assets = settings.GetBuildTaskAsset();
+            var contexts = new BuildContext();
+            foreach (var asset in assets) {
+                contexts.SetContextObject(asset);
             }
-            preProcessores[preProcessor.PreOrder].Add(preProcessor);
-            return state;
-        }
-        public static RegisterState RegisterPostProcessor(IPostProcessor postProcessor) {
-            var state = postProcessores.ContainsKey(postProcessor.PostOrder) ? RegisterState.Duplicated : RegisterState.Success;
-            if (!postProcessores.ContainsKey(postProcessor.PostOrder)) {
-                postProcessores.Add(postProcessor.PostOrder, new List<IPostProcessor>());
-            }
-            postProcessores[postProcessor.PostOrder].Add(postProcessor);
-            return state;
-        }
-        public static void PreProcess() {
-            Array.ForEach(preProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PreProcess(buildeHelper)));
-        }
-        public static void PostProcess() {
-            Array.ForEach(postProcessores.Values.ToArray(), procList => Array.ForEach(procList.ToArray(), proc => proc?.PostProcess(buildeHelper)));
-        }
-        public static void Process() {
-            buildLogHandler.PreProcess(buildeHelper);
-            PreProcess();
-            var result = processor.Process(buildeHelper);
-            if (result == BuildResult.Succeeded) {
-                PostProcess();
-            }
-            buildLogHandler.PostProcess(buildeHelper);
+
+            ReturnCode returnCode = BuildTasksRunner.Run(
+                assets.Select(asset => asset.GetBuildTask(helper)).ToArray(), contexts);
+
+            logHandler.Revert();
+
+            return returnCode;
         }
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration Identifier="example">
+<BuildConfiguration Identifier="example">
 	<Schemes>
 		<Scheme Identifier="product">
 			<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
@@ -48,4 +48,4 @@
 			</Deploygate>
 		</Scheme>
 	</Schemes>
-</Configuration>
+</BuildConfiguration>
