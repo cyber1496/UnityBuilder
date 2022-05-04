@@ -4,7 +4,9 @@
       "version": "file:com.cyber1496.unitybuilder",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.scriptablebuildpipeline": "1.19.6"
+      }
     },
     "com.unity.collab-proxy": {
       "version": "1.15.15",
@@ -43,6 +45,13 @@
     "com.unity.ide.vscode": {
       "version": "1.2.5",
       "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.scriptablebuildpipeline": {
+      "version": "1.19.6",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
