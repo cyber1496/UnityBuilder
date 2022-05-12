@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   supportBuildTargets: 32
   priority: 900
+  gradleBuiildScript: {fileID: 102900000, guid: c3d5336cda4d1432fa58251dd8dc5f4b,
+    type: 3}
+  buildToolJar: {fileID: 0}
+  buildToolScript: {fileID: 102900000, guid: 8be458049f45cb44682d9e9e43ceecbd, type: 3}
