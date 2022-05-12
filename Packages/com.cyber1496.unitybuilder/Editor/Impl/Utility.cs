@@ -34,6 +34,10 @@ namespace UnityBuilder {
     }
 
     public class Utility {
+        public static string AssetObjectToPath(UnityEngine.Object assetObject)
+        {
+            return AssetDatabase.GetAssetPath(assetObject);
+        }
         public static string ConvertPath(string path) {
 #if UNITY_EDITOR_WIN
             path = path.Replace("/", "\\");
