@@ -28,49 +28,48 @@ namespace UnityBuilder
             
         }
 
+        private string getScriptFullPath(string shellPath)
+        {
+#if UNITY_EDITOR_WIN
+            return Path.GetFullPath(shellPath).Replace(".sh", ".bat");
+#else
+            return Path.GetFullPath(shellPath);
+#endif
+        }
+
         private string getGradleBuildScriptPath()
         {
             if (gradleBuiildScript == null)
             {
-                return Path.GetFullPath(
-#if UNITY_EDITOR_WIN
-                    $"Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/gradle-build.bat");
-#else
-                    $"Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/gradle-build.sh");
-#endif
+                return getScriptFullPath("Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/gradle-build.sh");
             }
                 
-            return Utility.AssetObjectToPath(gradleBuiildScript);
+            return getScriptFullPath(Utility.AssetObjectToPath(gradleBuiildScript));
         }
             
         private string getBuildToolJarPath()
         {
             if (buildToolJar == null)
             {
-                return
+                return Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), 
 #if UNITY_EDITOR_WIN
-                    Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), $"Data/PlaybackEngines/AndroidPlayer/Tools/bundletool-all-1.6.0.jar");
+                        "Data/PlaybackEngines/AndroidPlayer/Tools/bundletool-all-1.6.0.jar");
 #else
-                    Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), $"PlaybackEngines/AndroidPlayer/Tools/bundletool-all-1.6.0.jar");
+                        "PlaybackEngines/AndroidPlayer/Tools/bundletool-all-1.6.0.jar");
 #endif
             }
                 
-            return Utility.AssetObjectToPath(buildToolJar);
+            return getScriptFullPath(Utility.AssetObjectToPath(buildToolJar));
         }
 
         private string getBuildToolScriptPath()
         {
             if (buildToolScript == null)
             {
-                return Path.GetFullPath(
-#if UNITY_EDITOR_WIN
-                    $"Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/buildtool-build-apks.bat");
-#else
-                    $"Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/buildtool-build-apks.sh");
-#endif
+                return getScriptFullPath("Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/buildtool-build-apks.sh");
             }
                 
-            return Utility.AssetObjectToPath(buildToolScript);
+            return getScriptFullPath(Utility.AssetObjectToPath(buildToolScript));
         }
 
         private string getBuildVariant(bool isDevelopment) =>
