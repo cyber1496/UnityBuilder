@@ -32,7 +32,6 @@ namespace UnityBuilder {
         public bool Development;
         public IOS IOS;
         public Android Android;
-        public Deploygate Deploygate;
         public string GetScriptingDefineSymbols(BuildTargetGroup buildTargetGroup) => buildTargetGroup switch {
             BuildTargetGroup.iOS => IOS.ScriptingDefineSymbols,
             BuildTargetGroup.Android => Android.ScriptingDefineSymbols,
@@ -46,8 +45,7 @@ namespace UnityBuilder {
                     $"ProductName:{ProductName}, " +
                     $"Development:{Development}, " +
                     $"IOS:[{IOS}], " +
-                    $"Android:[{Android}]" +
-                    $"Deploygate:[{Deploygate}]";
+                    $"Android:[{Android}]";
         }
     }
 
@@ -87,14 +85,6 @@ namespace UnityBuilder {
                     $"KeyaliasName:{KeyaliasName}, " +
                     $"KeyaliasPass:<private>, " +
                     $"UseCustomKeystore:{UseCustomKeystore}";
-        }
-    }
-
-    public struct Deploygate {
-        public const string PREFS_KEY = "UnityBuilder.StandardKit.Deploygate.Authorization";
-        public string Authorization;
-        public override string ToString() {
-            return $"Authorization:{Authorization}";
         }
     }
 }

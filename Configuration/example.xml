@@ -21,9 +21,6 @@
 				<KeyaliasName>example</KeyaliasName>
                 <KeyaliasPass>example</KeyaliasPass>
 			</Android>
-			<Deploygate>
-                <Authorization>${HOME}/UnityBuilder.xml</Authorization>
-			</Deploygate>
 		</Scheme>
 		<Scheme Identifier="development">
 			<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
@@ -43,9 +40,6 @@
 				<KeyaliasName>example</KeyaliasName>
                 <KeyaliasPass>example</KeyaliasPass>
 			</Android>
-			<Deploygate>
-                <Authorization>${HOME}/UnityBuilder.xml</Authorization>
-			</Deploygate>
 		</Scheme>
 	</Schemes>
 </BuildConfiguration>
