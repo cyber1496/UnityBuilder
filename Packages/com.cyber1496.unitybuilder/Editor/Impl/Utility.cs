@@ -82,9 +82,9 @@ namespace UnityBuilder {
             p.StartInfo.FileName = ProcessFileName;
             p.StartInfo.Arguments = request.ProcessArguments;
             p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.UseShellExecute = true;
+            p.StartInfo.RedirectStandardOutput = false;
+            p.StartInfo.RedirectStandardError = false;
             p.StartInfo.StandardOutputEncoding = Encoding.UTF8;
             return p;
         }
