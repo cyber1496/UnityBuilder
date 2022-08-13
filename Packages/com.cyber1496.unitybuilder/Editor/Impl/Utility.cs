@@ -73,7 +73,7 @@ namespace UnityBuilder {
 #if UNITY_EDITOR_WIN
                 return Environment.GetEnvironmentVariable("ComSpec");
 #else
-                return "/bin/zsh";
+                return "/bin/bash";
 #endif
             }
         }
