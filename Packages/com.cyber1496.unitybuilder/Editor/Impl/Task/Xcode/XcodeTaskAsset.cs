@@ -28,6 +28,16 @@ namespace UnityBuilder {
             protected override ReturnCode onRun() {
                 try {
 #if UNITY_EDITOR_OSX
+                    string pbxPath = PBXProject.GetPBXProjectPath(helper.OutputPath);
+                    PBXProject pbx = new PBXProject();
+                    pbx.ReadFromString(File.ReadAllText(pbxPath));
+                    string target = pbx.GetUnityMainTargetGuid();
+
+                    pbx.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
+                    target = pbx.GetUnityFrameworkTargetGuid();
+                    pbx.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
+                    File.WriteAllText (pbxPath, pbx.WriteToString());
+
                     string scriptFileName = "xcode-build.sh";
                     string scriptFilePath = Path.GetFullPath($"Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/Xcode/{scriptFileName}");
 
