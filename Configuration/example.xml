@@ -9,7 +9,7 @@
 			<IOS>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
 				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
-				<XcodePath>/Applications/Xcode14.0.app</XcodePath>
+				<XcodePath>/Applications/Xcode14.2.app</XcodePath>
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
@@ -30,7 +30,7 @@
 			<IOS>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
 				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
-				<XcodePath>/Applications/Xcode14.0.app</XcodePath>
+				<XcodePath>/Applications/Xcode14.2.app</XcodePath>
 			</IOS>
 			<Android>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
