@@ -1,13 +1,9 @@
 using System;
 using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build.Pipeline.Interfaces;
 using UnityEditor.Build.Pipeline;
-using UnityEditor.Build.Pipeline.Injector;
 using Object = UnityEngine.Object;
 
 
@@ -22,11 +18,6 @@ namespace UnityBuilder
         
         public override IBuildTask GetBuildTask(IBuildHelper helper)
             => new AndroidGradleTask(helper, this);
-
-        private void Reset()
-        {
-            
-        }
 
         private string getScriptFullPath(string shellPath)
         {
@@ -49,7 +40,7 @@ namespace UnityBuilder
             
         private string getBuildToolJarPath()
         {
-            if (buildToolJar == null)
+            if (buildToolJar == null) 
             {
                 return Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), 
 #if UNITY_EDITOR_WIN
