@@ -1,10 +1,10 @@
 {
 	"name": "com.cyber1496.unitybuilder",
 	"displayName": "UnityBuilder",
-	"version": "2.0.2",
-	"unity": "2020.3",
+	"version": "2.1.0",
+	"unity": "2022.3",
 	"description": "UnityBuilder",
 	"dependencies": {
-		"com.unity.scriptablebuildpipeline": "1.19.6"
+		"com.unity.scriptablebuildpipeline": "1.21.21"
 	}
 }
