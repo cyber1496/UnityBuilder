@@ -1,13 +1,9 @@
 using System;
 using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build.Pipeline.Interfaces;
 using UnityEditor.Build.Pipeline;
-using UnityEditor.Build.Pipeline.Injector;
 using Object = UnityEngine.Object;
 
 
@@ -16,17 +12,12 @@ namespace UnityBuilder
     [CreateAssetMenu(menuName = "UnityBuilder/AndroidGradleTaskAsset", fileName = "AndroidGradleTaskAsset")]
     public sealed class AndroidGradleTaskAsset : BuildTaskAsset
     {
-        [SerializeField] private Object gradleBuiildScript;
+        [SerializeField] private Object gradleBuildScript;
         [SerializeField] private Object buildToolJar;
         [SerializeField] private Object buildToolScript;
         
         public override IBuildTask GetBuildTask(IBuildHelper helper)
             => new AndroidGradleTask(helper, this);
-
-        private void Reset()
-        {
-            
-        }
 
         private string getScriptFullPath(string shellPath)
         {
@@ -39,17 +30,17 @@ namespace UnityBuilder
 
         private string getGradleBuildScriptPath()
         {
-            if (gradleBuiildScript == null)
+            if (gradleBuildScript == null)
             {
                 return getScriptFullPath("Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/gradle-build.sh");
             }
                 
-            return getScriptFullPath(Utility.AssetObjectToPath(gradleBuiildScript));
+            return getScriptFullPath(Utility.AssetObjectToPath(gradleBuildScript));
         }
             
         private string getBuildToolJarPath()
         {
-            if (buildToolJar == null)
+            if (buildToolJar == null) 
             {
                 return Path.Combine(Path.GetDirectoryName(EditorApplication.applicationPath), 
 #if UNITY_EDITOR_WIN
@@ -59,7 +50,7 @@ namespace UnityBuilder
 #endif
             }
                 
-            return getScriptFullPath(Utility.AssetObjectToPath(buildToolJar));
+            return Path.GetFullPath(Utility.AssetObjectToPath(buildToolJar));
         }
 
         private string getBuildToolScriptPath()
