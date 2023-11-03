@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.0] - 2023-11-3
+
+- m_EditorVersion: 2022.3.12f1
+
 ## [1.9.0] - 2021-3-30
 
 - m_EditorVersion: 2020.3.31f1
