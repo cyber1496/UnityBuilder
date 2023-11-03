@@ -50,7 +50,7 @@ namespace UnityBuilder
 #endif
             }
                 
-            return getScriptFullPath(Utility.AssetObjectToPath(buildToolJar));
+            return Path.GetFullPath(Utility.AssetObjectToPath(buildToolJar));
         }
 
         private string getBuildToolScriptPath()
