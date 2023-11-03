@@ -26,7 +26,6 @@ namespace UnityBuilder {
 
     public struct Scheme {
         [XmlAttribute("Identifier")] public string Identifier;
-        public string ApplicationIdentifier;
         public string CompanyName;
         public string ProductName;
         public bool Development;
@@ -37,10 +36,14 @@ namespace UnityBuilder {
             BuildTargetGroup.Android => Android.ScriptingDefineSymbols,
             _ => "",
         };
+        public string GetApplicationIdentifier(BuildTargetGroup buildTargetGroup) => buildTargetGroup switch {
+            BuildTargetGroup.iOS => IOS.ApplicationIdentifier,
+            BuildTargetGroup.Android => Android.ApplicationIdentifier,
+            _ => "",
+        };
 
         public override string ToString() {
             return $"Identifier:{Identifier}, " +
-                    $"ApplicationIdentifier:{ApplicationIdentifier}, " +
                     $"CompanyName:{CompanyName}, " +
                     $"ProductName:{ProductName}, " +
                     $"Development:{Development}, " +
@@ -50,6 +53,7 @@ namespace UnityBuilder {
     }
 
     public struct IOS {
+        public string ApplicationIdentifier;
         public string ScriptingDefineSymbols;
         public string AppleDeveloperTeamID;
 
@@ -58,13 +62,15 @@ namespace UnityBuilder {
         public const string PREFS_KEY_XCODE_PATH = "UnityBuilder.StandardKit.iOS.XcodePath";
 
         public override string ToString() {
-            return $"ScriptingDefineSymbols:{ScriptingDefineSymbols}, " +
+            return $"ApplicationIdentifier:{ApplicationIdentifier}, " +
+                    $"ScriptingDefineSymbols:{ScriptingDefineSymbols}, " +
                     $"AppleDeveloperTeamID:{AppleDeveloperTeamID}," +
                     $"XcodePath:{XcodePath}";
         }
     }
 
     public struct Android {
+        public string ApplicationIdentifier;
         public string ScriptingDefineSymbols;
         public bool UseBuildAppBundle;
         public string KeystoreName;
@@ -78,7 +84,8 @@ namespace UnityBuilder {
             !string.IsNullOrEmpty(KeyaliasPass);
 
         public override string ToString() {
-            return $"ScriptingDefineSymbols:{ScriptingDefineSymbols}, " +
+            return $"ApplicationIdentifier:{ApplicationIdentifier}, " +
+                    $"ScriptingDefineSymbols:{ScriptingDefineSymbols}, " +
                     $"UseBuildAppBundle:{UseBuildAppBundle}, " +
                     $"KeystoreName:{KeystoreName}, " +
                     $"KeystorePass:<private>, " +

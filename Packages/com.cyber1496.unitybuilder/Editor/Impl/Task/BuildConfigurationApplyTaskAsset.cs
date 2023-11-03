@@ -34,7 +34,7 @@ namespace UnityBuilder
                 BuildLogger.Log(scheme.ToString());
                 EditorUserBuildSettings.development = scheme.Development;
                 EditorUserBuildSettings.allowDebugging = scheme.Development;
-                PlayerSettings.SetApplicationIdentifier(helper.BuildTargetGroup, scheme.ApplicationIdentifier);
+                PlayerSettings.SetApplicationIdentifier(helper.BuildTargetGroup, scheme.GetApplicationIdentifier(helper.BuildTargetGroup));
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(helper.BuildTargetGroup,
                     scheme.GetScriptingDefineSymbols(helper.BuildTargetGroup));
                 PlayerSettings.companyName = scheme.CompanyName;

@@ -1,7 +1,7 @@
 {
 	"name": "com.cyber1496.unitybuilder",
 	"displayName": "UnityBuilder",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"unity": "2020.3",
 	"description": "UnityBuilder",
 	"dependencies": {

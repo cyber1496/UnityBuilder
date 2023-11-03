@@ -2,16 +2,17 @@
 <BuildConfiguration Identifier="example">
 	<Schemes>
 		<Scheme Identifier="product">
-			<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
 			<CompanyName>cyber1496</CompanyName>
 			<ProductName>UnityBuilder</ProductName>
 			<Development>false</Development>
 			<IOS>
+				<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
 				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
 				<XcodePath>/Applications/Xcode14.2.app</XcodePath>
 			</IOS>
 			<Android>
+				<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
 				<UseBuildAppBundle>true</UseBuildAppBundle>
 				<KeystoreName>Configuration/example.keystore</KeystoreName>
@@ -23,16 +24,17 @@
 			</Android>
 		</Scheme>
 		<Scheme Identifier="development">
-			<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
 			<CompanyName>cyber1496</CompanyName>
 			<ProductName>[D]UnityBuilder</ProductName>
 			<Development>true</Development>
 			<IOS>
+				<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
 				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
 				<XcodePath>/Applications/Xcode14.2.app</XcodePath>
 			</IOS>
 			<Android>
+				<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
 				<UseBuildAppBundle>true</UseBuildAppBundle>
 				<KeystoreName>Configuration/example.keystore</KeystoreName>
