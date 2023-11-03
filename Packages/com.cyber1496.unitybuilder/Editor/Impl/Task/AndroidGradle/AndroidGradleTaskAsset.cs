@@ -12,7 +12,7 @@ namespace UnityBuilder
     [CreateAssetMenu(menuName = "UnityBuilder/AndroidGradleTaskAsset", fileName = "AndroidGradleTaskAsset")]
     public sealed class AndroidGradleTaskAsset : BuildTaskAsset
     {
-        [SerializeField] private Object gradleBuiildScript;
+        [SerializeField] private Object gradleBuildScript;
         [SerializeField] private Object buildToolJar;
         [SerializeField] private Object buildToolScript;
         
@@ -30,12 +30,12 @@ namespace UnityBuilder
 
         private string getGradleBuildScriptPath()
         {
-            if (gradleBuiildScript == null)
+            if (gradleBuildScript == null)
             {
                 return getScriptFullPath("Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/AndroidGradle/gradle-build.sh");
             }
                 
-            return getScriptFullPath(Utility.AssetObjectToPath(gradleBuiildScript));
+            return getScriptFullPath(Utility.AssetObjectToPath(gradleBuildScript));
         }
             
         private string getBuildToolJarPath()
