@@ -1,22 +1,31 @@
-﻿using UnityEditor;
-using UnityBuilder;
+﻿using UnityBuilder;
+using UnityEditor;
+using UnityEditor.Build.Pipeline;
+using UnityEngine;
 
 public static class Example {
     [MenuItem("Tools/Build/ForceReserializeAssets")]
-    static void ForceReserializeAssets() {
+    private static void ForceReserializeAssets() {
         AssetDatabase.ForceReserializeAssets();
     }
+
     [MenuItem("Tools/Build/Run")]
     private static void Run() {
-        var provider = new BuildProvider(AssetDatabase.LoadAssetAtPath<BuildProviderSettingAsset>("Assets/Example/Editor/BuildProviderSettingAsset.asset"));
-        var returnCode = provider.Run();
-        UnityEngine.Debug.Log(returnCode);
-    }
-    [MenuItem("Tools/Build/DryRun")]
-    private static void DryRun() {
-        var provider = new BuildProvider(AssetDatabase.LoadAssetAtPath<BuildProviderSettingAsset>("Assets/Example/Editor/BuildProviderSettingAsset.asset"));
-        var returnCode = provider.DryRun();
-        UnityEngine.Debug.Log(returnCode);
+        BuildProvider provider =
+            new BuildProvider(
+                AssetDatabase.LoadAssetAtPath<BuildProviderSettingAsset>(
+                    "Assets/Example/Editor/BuildProviderSettingAsset.asset"));
+        ReturnCode returnCode = provider.Run();
+        Debug.Log(returnCode);
     }
 
+    [MenuItem("Tools/Build/DryRun")]
+    private static void DryRun() {
+        BuildProvider provider =
+            new BuildProvider(
+                AssetDatabase.LoadAssetAtPath<BuildProviderSettingAsset>(
+                    "Assets/Example/Editor/BuildProviderSettingAsset.asset"));
+        ReturnCode returnCode = provider.DryRun();
+        Debug.Log(returnCode);
+    }
 }

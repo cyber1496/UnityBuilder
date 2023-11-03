@@ -9,7 +9,7 @@
 				<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
 				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
-				<XcodePath>/Applications/Xcode13.3.1.app</XcodePath>
+				<XcodePath>/Applications/Xcode14.2.app</XcodePath>
 			</IOS>
 			<Android>
 				<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
@@ -22,9 +22,6 @@
 				<KeyaliasName>example</KeyaliasName>
                 <KeyaliasPass>example</KeyaliasPass>
 			</Android>
-			<Deploygate>
-                <Authorization>${HOME}/UnityBuilder.xml</Authorization>
-			</Deploygate>
 		</Scheme>
 		<Scheme Identifier="development">
 			<CompanyName>cyber1496</CompanyName>
@@ -34,7 +31,7 @@
 				<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
     			<ScriptingDefineSymbols>APP_DEBUG</ScriptingDefineSymbols>
 				<AppleDeveloperTeamID>453R6FNS54</AppleDeveloperTeamID>
-				<XcodePath>/Applications/Xcode13.3.1.app</XcodePath>
+				<XcodePath>/Applications/Xcode14.2.app</XcodePath>
 			</IOS>
 			<Android>
 				<ApplicationIdentifier>com.cyber1496.UnityBuilder.development</ApplicationIdentifier>
@@ -45,9 +42,6 @@
 				<KeyaliasName>example</KeyaliasName>
                 <KeyaliasPass>example</KeyaliasPass>
 			</Android>
-			<Deploygate>
-                <Authorization>${HOME}/UnityBuilder.xml</Authorization>
-			</Deploygate>
 		</Scheme>
 	</Schemes>
 </BuildConfiguration>

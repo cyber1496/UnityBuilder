@@ -13,8 +13,10 @@ using UnityEditor.Build.Pipeline.Injector;
 
 namespace UnityBuilder {
     [CreateAssetMenu(menuName = "UnityBuilder/DeploygateTaskAsset", fileName = "DeploygateTaskAsset")]
-    public sealed class DeploygateTaskAsset : BuildTaskAsset {
-
+    public sealed class DeploygateTaskAsset : BuildTaskAsset
+    {
+        public string ConfigureFilePath = "${HOME}/UnityBuilder.xml";
+        
         public override IBuildTask GetBuildTask(IBuildHelper helper)
             => new DeploygateTask(helper, this);
 
@@ -29,7 +31,8 @@ namespace UnityBuilder {
 
             public override int Version => 1;
             protected override ReturnCode onRun() {
-                var authorization = Authorization.Load(EditorPrefs.GetString("UnityBuilder.StandardKit.Deploygate.Authorization"));
+                
+                var authorization = Authorization.Load(helper.GetReplacedPath(taskAsset.ConfigureFilePath));
                 if (!authorization.IsEnable) {
                     return ReturnCode.Success;
                 }
@@ -71,6 +74,16 @@ namespace UnityBuilder {
                     return ReturnCode.Error;
                 }
             }
+            
+			/// <example>
+            /// <code>
+            /// <?xml version="1.0" encoding="UTF-8"?>
+            /// <Authorization>
+            /// <Owner>---deploygate owner name---</Owner>
+            /// <APIKey>---deploygate api key---</APIKey>
+            /// </Authorization>
+            /// </code>
+			/// </example>
             public struct Authorization {
                 public string Owner;
                 public string APIKey;
