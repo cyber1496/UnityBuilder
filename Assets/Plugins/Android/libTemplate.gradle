@@ -1,4 +1,4 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 dependencies {
     implementation fileTree(dir: 'bin', include: ['*.jar'])
@@ -6,6 +6,8 @@ dependencies {
 }
 
 android {
+    namespace "**NAMESPACE**"
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -16,13 +18,14 @@ android {
         }
     }
 
-    compileSdkVersion **APIVERSION**
-    buildToolsVersion '**BUILDTOOLS**'
+    compileSdk **APIVERSION**
+    buildToolsVersion = "**BUILDTOOLS**"
     defaultConfig {
-        targetSdkVersion **LIBSDKTARGET**
+        minSdk **MINSDK**
+        targetSdk **LIBSDKTARGET**
     }
 
-    lintOptions {
+    lint {
         abortOnError false
     }
 }
