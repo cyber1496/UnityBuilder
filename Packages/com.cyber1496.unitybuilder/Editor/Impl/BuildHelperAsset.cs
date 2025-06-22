@@ -69,6 +69,42 @@ namespace UnityBuilder {
             return path;
         }
 
+        public EnvironmentType GetEnvironmentType() {
+            try {
+                // Check ENVIRONMENT variable set by SetUp.sh
+                string environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
+                if (!string.IsNullOrEmpty(environment)) {
+                    return environment switch {
+                        "Mac" => EnvironmentType.Mac,
+                        "WSL" => EnvironmentType.WSL,
+                        "Windows_NT" => EnvironmentType.Windows_NT,
+                        _ => EnvironmentType.Windows_NT // Default fallback
+                    };
+                }
+                
+                // Fallback to OS detection if ENVIRONMENT variable is not set
+                if (Application.platform == RuntimePlatform.OSXEditor) {
+                    return EnvironmentType.Mac;
+                } else if (Application.platform == RuntimePlatform.WindowsEditor) {
+                    return EnvironmentType.Windows_NT;
+                } else {
+                    return EnvironmentType.Windows_NT; // Default fallback
+                }
+            }
+            catch {
+                // Fallback to OS detection
+                if (Application.platform == RuntimePlatform.OSXEditor) {
+                    return EnvironmentType.Mac;
+                } else {
+                    return EnvironmentType.Windows_NT;
+                }
+            }
+        }
+
+        public bool IsEnvironment(EnvironmentType environmentType) {
+            return GetEnvironmentType() == environmentType;
+        }
+
         private Scheme Load(string configName, string schemeName) {
             if (BuildArguments.ContainsKey("-batchmode")) {
                 if (BuildArguments.ContainsKey("-config") && BuildArguments.ContainsKey("-scheme")) {

@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: cyber1496
-  productName: UnityBuilder
+  productName: '[D]UnityBuilder'
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -165,9 +165,9 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.cyber1496.UnityBuilder
+    Android: com.cyber1496.UnityBuilder.development
     Standalone: com.cyber1496.UnityBuilder
-    iPhone: com.cyber1496.UnityBuilder
+    iPhone: com.cyber1496.UnityBuilder.development
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -807,8 +807,8 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Android: 
-    iPhone: 
+    Android: APP_DEBUG
+    iPhone: APP_DEBUG
   additionalCompilerArguments: {}
   platformArchitecture:
     iPhone: 1

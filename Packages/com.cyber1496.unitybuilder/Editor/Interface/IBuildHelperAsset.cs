@@ -3,6 +3,12 @@ using UnityEditor;
 
 namespace UnityBuilder {
 
+    public enum EnvironmentType {
+        Mac,
+        WSL,
+        Windows_NT
+    }
+
     public interface IBuildHelperAsset {
         IBuildHelper GetBuildHelper();
     }
@@ -21,5 +27,7 @@ namespace UnityBuilder {
         Scheme Scheme { get; }
 
         string GetReplacedPath(string path);
+        EnvironmentType GetEnvironmentType();
+        bool IsEnvironment(EnvironmentType environmentType);
     }
 }
