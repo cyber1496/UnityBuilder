@@ -100,3 +100,30 @@ sh Packages/com.cyber1496.unitybuilder/Editor/Batch/AppBuild.sh -p Android -c ex
 
 - It is basically output with the following naming.
   - build/[platform]/[ProductName]
+
+## 〇 WSL/Ubuntu-22.04 Setup Command Examples (Tested)
+
+```sh
+# Install required packages
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y build-essential curl unzip libz3-dev
+
+# Download, extract, and remove the Swift toolchain
+curl -LO https://download.swift.org/swift-5.3.3-release/ubuntu2004/swift-5.3.3-RELEASE/swift-5.3.3-RELEASE-ubuntu20.04.tar.gz
+mkdir -p ~/swift
+# Extract (with --strip-components=1 to place contents under usr/)
+tar -xzf swift-5.3.3-RELEASE-ubuntu20.04.tar.gz -C ~/swift --strip-components=1
+rm swift-5.3.3-RELEASE-ubuntu20.04.tar.gz
+
+# Add Swift to PATH (append to the end of .bashrc)
+echo 'export PATH="$HOME/swift/usr/bin:$PATH"' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH="$HOME/swift/usr/lib:$LD_LIBRARY_PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# Verify Swift installation
+swift --version
+
+# xtool setup (run from the project root)
+bash Packages/com.cyber1496.unitybuilder/Editor/Impl/Task/Xcode/xtool-setup.sh
+```

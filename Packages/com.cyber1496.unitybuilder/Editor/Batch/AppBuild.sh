@@ -58,7 +58,7 @@ mkdir -p "Logs/${PLATFORM}"
 
 if [ "$ENVIRONMENT" = 'Windows_NT' ] && [ "$PLATFORM" = 'iOS' ]; then
     echo "Not supported environment."
-    exit 1
+	exit 1
 fi
 
 # Get the correct project path
@@ -75,15 +75,15 @@ echo "Executing Unity command:"
 echo "${UNITY_PATH} -quit -batchmode -projectPath \"${PROJECT_PATH}\" -buildTarget \"$(echo "${PLATFORM}" | tr '[A-Z]' '[a-z]')\" -executeMethod \"${ENTRY_METHOD}\" -config \"${CONFIG}\" -scheme \"${SCHEME}\" -logFile \"${TMP_LOG}\""
 
 "${UNITY_PATH}" \
-    -quit \
-    -batchmode \
+	-quit \
+	-batchmode \
     -projectPath "${PROJECT_PATH}" \
     -buildTarget "$(echo "${PLATFORM}" | tr '[A-Z]' '[a-z]')" \
-    -executeMethod "${ENTRY_METHOD}" \
-    -config "${CONFIG}" \
-    -scheme "${SCHEME}" \
-    -logFile "${TMP_LOG}"
+	-executeMethod "${ENTRY_METHOD}" \
+	-config "${CONFIG}" \
+	-scheme "${SCHEME}" \
+	-logFile "${TMP_LOG}"
 EXIT_CODE=$?
 
 cat "$TMP_LOG"
-exit $EXIT_CODE 
+exit $EXIT_CODE

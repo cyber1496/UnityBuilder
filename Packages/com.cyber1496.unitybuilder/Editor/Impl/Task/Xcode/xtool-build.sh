@@ -55,7 +55,7 @@ echo "Current Directory: $(pwd)"
 echo "Date: $(date)"
 
 # Xtoolの存在確認とセットアップ
-XTOOL_PATH="/usr/bin/xtool"
+XTOOL_PATH="./xtool"
 if [ ! -f "$XTOOL_PATH" ]; then
     echo "Xtool not found at $XTOOL_PATH"
     echo "Attempting to install xtool..."
@@ -127,9 +127,11 @@ echo "Bundle ID: $BUNDLE_ID"
 
 # ステップ1: ビルド実行
 echo "=== Step 1: Building with xtool ==="
-echo "Command: $XTOOL_PATH build \"$OUTPUT_PATH\" --configuration \"$CONFIGURATION\""
+#echo "Command: $XTOOL_PATH build \"$OUTPUT_PATH\" --configuration \"$CONFIGURATION\""
+echo "Command: $XTOOL_PATH build"
 
-if "$XTOOL_PATH" build "$OUTPUT_PATH" --configuration "$CONFIGURATION"; then
+#if "$XTOOL_PATH" build "$OUTPUT_PATH" --configuration "$CONFIGURATION"; then
+if "$XTOOL_PATH" build; then
     echo "✓ Build completed successfully"
 else
     echo "Error: Build failed"
