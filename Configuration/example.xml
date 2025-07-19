@@ -12,7 +12,7 @@
 				<XcodePath>/Applications/Xcode14.2.app</XcodePath>
 			</IOS>
 			<Android>
-				<ApplicationIdentifier>com.cyber1496.UnityBuilder</ApplicationIdentifier>
+				<ApplicationIdentifier>com.Cyber.UnityBuilder</ApplicationIdentifier>
     			<ScriptingDefineSymbols></ScriptingDefineSymbols>
 				<UseBuildAppBundle>true</UseBuildAppBundle>
 				<KeystoreName>Configuration/example.keystore</KeystoreName>
